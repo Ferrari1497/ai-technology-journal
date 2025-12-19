@@ -228,10 +228,11 @@ function getCategoryLabel(category) {
 }
 
 async function generateNewsWithOpenAI(language) {
+  let completion = null
   try {
     console.log(`🤖 OpenAI APIで${language.toUpperCase()}ニュースを生成中...`)
     
-    const completion = await openai.chat.completions.create({
+    completion = await openai.chat.completions.create({
       model: "gpt-3.5-turbo",
       messages: [
         {
@@ -248,6 +249,7 @@ async function generateNewsWithOpenAI(language) {
     })
 
     let response = completion.choices[0].message.content.trim()
+    console.log(`📝 ${language.toUpperCase()}生レスポンス:`, response.substring(0, 200) + '...')
     
     // JSONの前後の不要な文字を削除
     const jsonStart = response.indexOf('{')
@@ -257,8 +259,17 @@ async function generateNewsWithOpenAI(language) {
       response = response.substring(jsonStart, jsonEnd)
     }
     
-    // 改行文字をエスケープ
-    response = response.replace(/\n/g, '\\n').replace(/\r/g, '\\r')
+    // 不正な文字をクリーンアップ
+    response = response
+      .replace(/\\n/g, ' ')  // エスケープされた改行を空白に
+      .replace(/\\r/g, ' ')  // エスケープされたキャリッジリターンを空白に
+      .replace(/\n/g, ' ')   // 改行を空白に
+      .replace(/\r/g, ' ')   // キャリッジリターンを空白に
+      .replace(/\t/g, ' ')   // タブを空白に
+      .replace(/\\"/g, '"') // エスケープされたクォートを修正
+      .replace(/\s+/g, ' ')  // 複数の空白を1つに
+    
+    console.log(`🔧 ${language.toUpperCase()}クリーンアップ後:`, response.substring(0, 200) + '...')
     
     const newsData = JSON.parse(response)
     
@@ -267,7 +278,9 @@ async function generateNewsWithOpenAI(language) {
     
   } catch (error) {
     console.error(`❌ ${language.toUpperCase()}ニュース生成エラー:`, error.message)
-    console.error(`レスポンス内容:`, completion?.choices?.[0]?.message?.content || 'なし')
+    if (completion?.choices?.[0]?.message?.content) {
+      console.error(`レスポンス内容:`, completion.choices[0].message.content.substring(0, 500))
+    }
     
     // フォールバック: 静的データを使用
     const fallbackNews = {
