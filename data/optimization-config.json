@@ -1,0 +1,21 @@
+{
+  "lastUpdated": "2025-12-17T12:42:09.947Z",
+  "targetCategory": "生成AIツール比較",
+  "optimalWordCount": 2000,
+  "priorityKeywords": [
+    "AI"
+  ],
+  "publishingStrategy": {
+    "optimalTime": "09:00",
+    "frequency": "daily",
+    "abTestEnabled": true
+  },
+  "contentStrategy": {
+    "successPatterns": [
+      "データ収集中"
+    ],
+    "improvementFocus": [
+      "十分なデータが蓄積されていません"
+    ]
+  }
+}

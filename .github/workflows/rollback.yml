@@ -1,0 +1,113 @@
+name: Rollback Deployment
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Target environment'
+        required: true
+        type: choice
+        options:
+        - staging
+        - production
+      commit_sha:
+        description: 'Commit SHA to rollback to (optional)'
+        required: false
+        type: string
+
+jobs:
+  rollback:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        ref: ${{ github.event.inputs.commit_sha || github.sha }}
+        
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: npm ci
+      
+    - name: Set environment variables
+      run: |
+        if [ "${{ github.event.inputs.environment }}" = "production" ]; then
+          echo "NEXT_PUBLIC_SITE_URL=https://ai-tech-journal.com" >> $GITHUB_ENV
+          echo "NEXT_PUBLIC_ENVIRONMENT=production" >> $GITHUB_ENV
+          echo "TARGET_BUCKET=${{ secrets.S3_BUCKET_PROD }}" >> $GITHUB_ENV
+          echo "CLOUDFRONT_ID=${{ secrets.CLOUDFRONT_DISTRIBUTION_ID_PROD }}" >> $GITHUB_ENV
+        else
+          echo "NEXT_PUBLIC_SITE_URL=https://staging.ai-tech-journal.com" >> $GITHUB_ENV
+          echo "NEXT_PUBLIC_ENVIRONMENT=staging" >> $GITHUB_ENV
+          echo "TARGET_BUCKET=${{ secrets.S3_BUCKET_STAGING }}" >> $GITHUB_ENV
+          echo "CLOUDFRONT_ID=${{ secrets.CLOUDFRONT_DISTRIBUTION_ID_STAGING }}" >> $GITHUB_ENV
+        fi
+        
+    - name: Build and export
+      run: |
+        npm run build
+        npm run export
+        
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ap-northeast-1
+        
+    - name: Rollback deployment
+      run: |
+        echo "🔄 Rolling back to commit: ${{ github.event.inputs.commit_sha || github.sha }}"
+        aws s3 sync out/ s3://$TARGET_BUCKET --delete
+        aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_ID --paths "/*"
+        
+    - name: Wait for rollback
+      run: sleep 30
+      
+    - name: Verify rollback
+      run: node scripts/post-deploy.js ${{ github.event.inputs.environment }}
+      
+    - name: Create rollback issue
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const issueBody = `
+          ## ロールバック実行 🔄
+          
+          **環境**: ${{ github.event.inputs.environment }}
+          **ロールバック先**: ${{ github.event.inputs.commit_sha || github.sha }}
+          **実行時刻**: ${new Date().toISOString()}
+          **実行者**: ${{ github.actor }}
+          
+          ### 詳細
+          - URL: ${{ env.NEXT_PUBLIC_SITE_URL }}
+          - 対象ブランチ: ${{ github.ref_name }}
+          
+          ### 次のアクション
+          1. ロールバック原因の調査
+          2. 問題の修正
+          3. 再デプロイの準備
+          
+          ---
+          *このIssueは自動生成されました*
+          `;
+          
+          github.rest.issues.create({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            title: `ロールバック実行: ${{ github.event.inputs.environment }} - ${new Date().toISOString().split('T')[0]}`,
+            body: issueBody,
+            labels: ['rollback', 'automated', 'urgent']
+          });
+          
+    - name: Rollback summary
+      run: |
+        echo "🔄 Rollback completed"
+        echo "Environment: ${{ github.event.inputs.environment }}"
+        echo "Commit: ${{ github.event.inputs.commit_sha || github.sha }}"
+        echo "URL: ${{ env.NEXT_PUBLIC_SITE_URL }}"

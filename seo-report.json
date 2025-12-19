@@ -1,0 +1,1025 @@
+{
+  "generatedAt": "2025-12-17T12:05:07.830Z",
+  "summary": {
+    "totalPosts": 28,
+    "overallScore": 74,
+    "languageBreakdown": [
+      {
+        "lang": "ja",
+        "count": 10,
+        "avgScore": 72
+      },
+      {
+        "lang": "en",
+        "count": 9,
+        "avgScore": 77
+      },
+      {
+        "lang": "th",
+        "count": 9,
+        "avgScore": 74
+      }
+    ]
+  },
+  "topPerformers": [
+    {
+      "lang": "en",
+      "slug": "2025-12-17-ai-news-anthropic-claude-3-5--------",
+      "title": "[AI News Flash] Anthropic、Claude 3.5の性能向上を報告",
+      "score": 85
+    },
+    {
+      "lang": "en",
+      "slug": "2025-12-17-chatgpt-vs-claude-vs-gemini--2025-latest-feature-comparison",
+      "title": "ChatGPT vs Claude vs Gemini: 2025 Latest Feature Comparison",
+      "score": 85
+    },
+    {
+      "lang": "en",
+      "slug": "business-efficiency-ai",
+      "title": "AI-Powered Business Efficiency: Project Management and Document Automation",
+      "score": 85
+    },
+    {
+      "lang": "en",
+      "slug": "chatgpt-vs-claude-comparison",
+      "title": "ChatGPT vs Claude vs Gemini: Which AI Offers the Best Value?",
+      "score": 85
+    },
+    {
+      "lang": "th",
+      "slug": "2025-12-17-ai-news-anthropic-claude-3-5--------",
+      "title": "[ข่าวด่วน AI] Anthropic、Claude 3.5の性能向上を報告",
+      "score": 85
+    },
+    {
+      "lang": "th",
+      "slug": "2025-12-17-chatgpt-vs-claude-vs-gemini---------------------------2025",
+      "title": "ChatGPT vs Claude vs Gemini: เปรียบเทียบฟีเจอร์ล่าสุด 2025",
+      "score": 85
+    }
+  ],
+  "needsImprovement": [],
+  "commonIssues": [
+    {
+      "issue": "内部リンクがありません",
+      "count": 28
+    },
+    {
+      "issue": "キーワード密度が高すぎます（1-3%推奨）",
+      "count": 25
+    },
+    {
+      "issue": "説明文が短すぎます（120文字以上推奨）",
+      "count": 21
+    },
+    {
+      "issue": "タイトルが長すぎます（60文字以下推奨）",
+      "count": 8
+    },
+    {
+      "issue": "タイトルが短すぎます（30文字以上推奨）",
+      "count": 3
+    },
+    {
+      "issue": "説明文が長すぎます（160文字以下推奨）",
+      "count": 1
+    }
+  ],
+  "detailedAnalyses": [
+    {
+      "lang": "ja",
+      "slug": "2025-12-16-ai-------------------",
+      "title": "AI営業支援ツール：成約率向上の実証データ",
+      "score": 65,
+      "metrics": {
+        "titleLength": 21,
+        "descriptionLength": 57,
+        "keywordDensity": 11.827956989247312,
+        "wordCount": 186,
+        "hasImages": false,
+        "internalLinks": 0,
+        "h1Count": 1,
+        "h2Count": 7
+      },
+      "recommendations": [
+        {
+          "type": "warning",
+          "message": "タイトルが短すぎます（30文字以上推奨）",
+          "priority": "medium"
+        },
+        {
+          "type": "warning",
+          "message": "説明文が短すぎます（120文字以上推奨）",
+          "priority": "medium"
+        },
+        {
+          "type": "warning",
+          "message": "キーワード密度が高すぎます（1-3%推奨）",
+          "priority": "high"
+        },
+        {
+          "type": "info",
+          "message": "内部リンクがありません",
+          "priority": "low"
+        }
+      ]
+    },
+    {
+      "lang": "ja",
+      "slug": "2025-12-17-ai-------------------------",
+      "title": "AIライティングツール徹底比較：料金・精度・使いやすさ",
+      "score": 65,
+      "metrics": {
+        "titleLength": 27,
+        "descriptionLength": 63,
+        "keywordDensity": 23.52941176470588,
+        "wordCount": 68,
+        "hasImages": false,
+        "internalLinks": 0,
+        "h1Count": 1,
+        "h2Count": 4
+      },
+      "recommendations": [
+        {
+          "type": "warning",
+          "message": "タイトルが短すぎます（30文字以上推奨）",
+          "priority": "medium"
+        },
+        {
+          "type": "warning",
+          "message": "説明文が短すぎます（120文字以上推奨）",
+          "priority": "medium"
+        },
+        {
+          "type": "warning",
+          "message": "キーワード密度が高すぎます（1-3%推奨）",
+          "priority": "high"
+        },
+        {
+          "type": "info",
+          "message": "内部リンクがありません",
+          "priority": "low"
+        }
+      ]
+    },
+    {
+      "lang": "ja",
+      "slug": "2025-12-17-ai-news-anthropic-claude-3-5--------",
+      "title": "【AIニュース速報】Anthropic、Claude 3.5の性能向上を報告",
+      "score": 75,
+      "metrics": {
+        "titleLength": 38,
+        "descriptionLength": 55,
+        "keywordDensity": 3.7037037037037033,
+        "wordCount": 81,
+        "hasImages": false,
+        "internalLinks": 0,
+        "h1Count": 1,
+        "h2Count": 5
+      },
+      "recommendations": [
+        {
+          "type": "warning",
+          "message": "説明文が短すぎます（120文字以上推奨）",
+          "priority": "medium"
+        },
+        {
+          "type": "warning",
+          "message": "キーワード密度が高すぎます（1-3%推奨）",
+          "priority": "high"
+        },
+        {
+          "type": "info",
+          "message": "内部リンクがありません",
+          "priority": "low"
+        }
+      ]
+    },
+    {
+      "lang": "ja",
+      "slug": "2025-12-17-chatgpt-vs-claude-vs-gemini-2025-------",
+      "title": "ChatGPT vs Claude vs Gemini：2025年最新機能比較",
+      "score": 75,
+      "metrics": {
+        "titleLength": 39,
+        "descriptionLength": 75,
+        "keywordDensity": 12.5,
+        "wordCount": 80,
+        "hasImages": false,
+        "internalLinks": 0,
+        "h1Count": 1,
+        "h2Count": 4
+      },
+      "recommendations": [
+        {
+          "type": "warning",
+          "message": "説明文が短すぎます（120文字以上推奨）",
+          "priority": "medium"
+        },
+        {
+          "type": "warning",
+          "message": "キーワード密度が高すぎます（1-3%推奨）",
+          "priority": "high"
+        },
+        {
+          "type": "info",
+          "message": "内部リンクがありません",
+          "priority": "low"
+        }
+      ]
+    },
+    {
+      "lang": "ja",
+      "slug": "2025-12-17-claude-pro-review",
+      "title": "Claude Proの使い方と料金プラン：2025年最新レビュー",
+      "score": 75,
+      "metrics": {
+        "titleLength": 32,
+        "descriptionLength": 42,
+        "keywordDensity": 9.615384615384617,
+        "wordCount": 156,
+        "hasImages": false,
+        "internalLinks": 0,
+        "h1Count": 1,
+        "h2Count": 7
+      },
+      "recommendations": [
+        {
+          "type": "warning",
+          "message": "説明文が短すぎます（120文字以上推奨）",
+          "priority": "medium"
+        },
+        {
+          "type": "warning",
+          "message": "キーワード密度が高すぎます（1-3%推奨）",
+          "priority": "high"
+        },
+        {
+          "type": "info",
+          "message": "内部リンクがありません",
+          "priority": "low"
+        }
+      ]
+    },
+    {
+      "lang": "ja",
+      "slug": "2025-12-17-github-copilot-review",
+      "title": "GitHub Copilotの使い方と料金プラン：2025年最新レビュー",
+      "score": 75,
+      "metrics": {
+        "titleLength": 36,
+        "descriptionLength": 46,
+        "keywordDensity": 9.615384615384617,
+        "wordCount": 156,
+        "hasImages": false,
+        "internalLinks": 0,
+        "h1Count": 1,
+        "h2Count": 7
+      },
+      "recommendations": [
+        {
+          "type": "warning",
+          "message": "説明文が短すぎます（120文字以上推奨）",
+          "priority": "medium"
+        },
+        {
+          "type": "warning",
+          "message": "キーワード密度が高すぎます（1-3%推奨）",
+          "priority": "high"
+        },
+        {
+          "type": "info",
+          "message": "内部リンクがありません",
+          "priority": "low"
+        }
+      ]
+    },
+    {
+      "lang": "ja",
+      "slug": "ai-customer-support-saas",
+      "title": "AIカスタマーサポートSaaS比較：コスト削減と顧客満足度向上",
+      "score": 75,
+      "metrics": {
+        "titleLength": 31,
+        "descriptionLength": 46,
+        "keywordDensity": 7.462686567164178,
+        "wordCount": 134,
+        "hasImages": false,
+        "internalLinks": 0,
+        "h1Count": 1,
+        "h2Count": 6
+      },
+      "recommendations": [
+        {
+          "type": "warning",
+          "message": "説明文が短すぎます（120文字以上推奨）",
+          "priority": "medium"
+        },
+        {
+          "type": "warning",
+          "message": "キーワード密度が高すぎます（1-3%推奨）",
+          "priority": "high"
+        },
+        {
+          "type": "info",
+          "message": "内部リンクがありません",
+          "priority": "low"
+        }
+      ]
+    },
+    {
+      "lang": "ja",
+      "slug": "ai-writing-saas-comparison",
+      "title": "AIライティングSaaS徹底比較：副業収益を最大化する方法",
+      "score": 65,
+      "metrics": {
+        "titleLength": 29,
+        "descriptionLength": 43,
+        "keywordDensity": 14.893617021276595,
+        "wordCount": 94,
+        "hasImages": false,
+        "internalLinks": 0,
+        "h1Count": 1,
+        "h2Count": 4
+      },
+      "recommendations": [
+        {
+          "type": "warning",
+          "message": "タイトルが短すぎます（30文字以上推奨）",
+          "priority": "medium"
+        },
+        {
+          "type": "warning",
+          "message": "説明文が短すぎます（120文字以上推奨）",
+          "priority": "medium"
+        },
+        {
+          "type": "warning",
+          "message": "キーワード密度が高すぎます（1-3%推奨）",
+          "priority": "high"
+        },
+        {
+          "type": "info",
+          "message": "内部リンクがありません",
+          "priority": "low"
+        }
+      ]
+    },
+    {
+      "lang": "ja",
+      "slug": "business-efficiency-ai",
+      "title": "AI活用で業務効率化：プロジェクト管理とドキュメント自動生成",
+      "score": 75,
+      "metrics": {
+        "titleLength": 30,
+        "descriptionLength": 52,
+        "keywordDensity": 13.48314606741573,
+        "wordCount": 89,
+        "hasImages": false,
+        "internalLinks": 0,
+        "h1Count": 1,
+        "h2Count": 6
+      },
+      "recommendations": [
+        {
+          "type": "warning",
+          "message": "説明文が短すぎます（120文字以上推奨）",
+          "priority": "medium"
+        },
+        {
+          "type": "warning",
+          "message": "キーワード密度が高すぎます（1-3%推奨）",
+          "priority": "high"
+        },
+        {
+          "type": "info",
+          "message": "内部リンクがありません",
+          "priority": "low"
+        }
+      ]
+    },
+    {
+      "lang": "ja",
+      "slug": "chatgpt-vs-claude-comparison",
+      "title": "ChatGPT vs Claude vs Gemini：どのAIが一番コスパ良い？",
+      "score": 75,
+      "metrics": {
+        "titleLength": 41,
+        "descriptionLength": 46,
+        "keywordDensity": 22.330097087378643,
+        "wordCount": 103,
+        "hasImages": false,
+        "internalLinks": 0,
+        "h1Count": 1,
+        "h2Count": 4
+      },
+      "recommendations": [
+        {
+          "type": "warning",
+          "message": "説明文が短すぎます（120文字以上推奨）",
+          "priority": "medium"
+        },
+        {
+          "type": "warning",
+          "message": "キーワード密度が高すぎます（1-3%推奨）",
+          "priority": "high"
+        },
+        {
+          "type": "info",
+          "message": "内部リンクがありません",
+          "priority": "low"
+        }
+      ]
+    },
+    {
+      "lang": "en",
+      "slug": "2025-12-17-ai-news-anthropic-claude-3-5--------",
+      "title": "[AI News Flash] Anthropic、Claude 3.5の性能向上を報告",
+      "score": 85,
+      "metrics": {
+        "titleLength": 44,
+        "descriptionLength": 55,
+        "keywordDensity": 1.0101010101010102,
+        "wordCount": 198,
+        "hasImages": false,
+        "internalLinks": 0,
+        "h1Count": 1,
+        "h2Count": 5
+      },
+      "recommendations": [
+        {
+          "type": "warning",
+          "message": "説明文が短すぎます（120文字以上推奨）",
+          "priority": "medium"
+        },
+        {
+          "type": "info",
+          "message": "内部リンクがありません",
+          "priority": "low"
+        }
+      ]
+    },
+    {
+      "lang": "en",
+      "slug": "2025-12-17-chatgpt-vs-claude-vs-gemini--2025-latest-feature-comparison",
+      "title": "ChatGPT vs Claude vs Gemini: 2025 Latest Feature Comparison",
+      "score": 85,
+      "metrics": {
+        "titleLength": 59,
+        "descriptionLength": 155,
+        "keywordDensity": 4.5,
+        "wordCount": 200,
+        "hasImages": false,
+        "internalLinks": 0,
+        "h1Count": 1,
+        "h2Count": 4
+      },
+      "recommendations": [
+        {
+          "type": "warning",
+          "message": "キーワード密度が高すぎます（1-3%推奨）",
+          "priority": "high"
+        },
+        {
+          "type": "info",
+          "message": "内部リンクがありません",
+          "priority": "low"
+        }
+      ]
+    },
+    {
+      "lang": "en",
+      "slug": "2025-12-17-claude-pro-review",
+      "title": "Claude Pro Review 2025: Features, Pricing & How to Use",
+      "score": 75,
+      "metrics": {
+        "titleLength": 54,
+        "descriptionLength": 95,
+        "keywordDensity": 3.343465045592705,
+        "wordCount": 329,
+        "hasImages": false,
+        "internalLinks": 0,
+        "h1Count": 1,
+        "h2Count": 7
+      },
+      "recommendations": [
+        {
+          "type": "warning",
+          "message": "説明文が短すぎます（120文字以上推奨）",
+          "priority": "medium"
+        },
+        {
+          "type": "warning",
+          "message": "キーワード密度が高すぎます（1-3%推奨）",
+          "priority": "high"
+        },
+        {
+          "type": "info",
+          "message": "内部リンクがありません",
+          "priority": "low"
+        }
+      ]
+    },
+    {
+      "lang": "en",
+      "slug": "2025-12-17-code-generation-ai-comparison--github-copilot-vs-cursor-vs-codeium",
+      "title": "Code Generation AI Comparison: GitHub Copilot vs Cursor vs Codeium",
+      "score": 65,
+      "metrics": {
+        "titleLength": 66,
+        "descriptionLength": 162,
+        "keywordDensity": 5.911330049261084,
+        "wordCount": 203,
+        "hasImages": false,
+        "internalLinks": 0,
+        "h1Count": 1,
+        "h2Count": 4
+      },
+      "recommendations": [
+        {
+          "type": "warning",
+          "message": "タイトルが長すぎます（60文字以下推奨）",
+          "priority": "medium"
+        },
+        {
+          "type": "warning",
+          "message": "説明文が長すぎます（160文字以下推奨）",
+          "priority": "medium"
+        },
+        {
+          "type": "warning",
+          "message": "キーワード密度が高すぎます（1-3%推奨）",
+          "priority": "high"
+        },
+        {
+          "type": "info",
+          "message": "内部リンクがありません",
+          "priority": "low"
+        }
+      ]
+    },
+    {
+      "lang": "en",
+      "slug": "2025-12-17-github-copilot-review",
+      "title": "GitHub Copilot Review 2025: Features, Pricing & How to Use",
+      "score": 75,
+      "metrics": {
+        "titleLength": 58,
+        "descriptionLength": 99,
+        "keywordDensity": 3.343465045592705,
+        "wordCount": 329,
+        "hasImages": false,
+        "internalLinks": 0,
+        "h1Count": 1,
+        "h2Count": 7
+      },
+      "recommendations": [
+        {
+          "type": "warning",
+          "message": "説明文が短すぎます（120文字以上推奨）",
+          "priority": "medium"
+        },
+        {
+          "type": "warning",
+          "message": "キーワード密度が高すぎます（1-3%推奨）",
+          "priority": "high"
+        },
+        {
+          "type": "info",
+          "message": "内部リンクがありません",
+          "priority": "low"
+        }
+      ]
+    },
+    {
+      "lang": "en",
+      "slug": "ai-customer-support-saas",
+      "title": "AI Customer Support SaaS Comparison: Cost Reduction and Customer Satisfaction Improvement",
+      "score": 75,
+      "metrics": {
+        "titleLength": 89,
+        "descriptionLength": 124,
+        "keywordDensity": 3.9473684210526314,
+        "wordCount": 304,
+        "hasImages": false,
+        "internalLinks": 0,
+        "h1Count": 1,
+        "h2Count": 6
+      },
+      "recommendations": [
+        {
+          "type": "warning",
+          "message": "タイトルが長すぎます（60文字以下推奨）",
+          "priority": "medium"
+        },
+        {
+          "type": "warning",
+          "message": "キーワード密度が高すぎます（1-3%推奨）",
+          "priority": "high"
+        },
+        {
+          "type": "info",
+          "message": "内部リンクがありません",
+          "priority": "low"
+        }
+      ]
+    },
+    {
+      "lang": "en",
+      "slug": "ai-writing-saas-comparison",
+      "title": "AI Writing SaaS Comprehensive Comparison: Maximizing Side Business Revenue",
+      "score": 65,
+      "metrics": {
+        "titleLength": 74,
+        "descriptionLength": 119,
+        "keywordDensity": 6.103286384976526,
+        "wordCount": 213,
+        "hasImages": false,
+        "internalLinks": 0,
+        "h1Count": 1,
+        "h2Count": 4
+      },
+      "recommendations": [
+        {
+          "type": "warning",
+          "message": "タイトルが長すぎます（60文字以下推奨）",
+          "priority": "medium"
+        },
+        {
+          "type": "warning",
+          "message": "説明文が短すぎます（120文字以上推奨）",
+          "priority": "medium"
+        },
+        {
+          "type": "warning",
+          "message": "キーワード密度が高すぎます（1-3%推奨）",
+          "priority": "high"
+        },
+        {
+          "type": "info",
+          "message": "内部リンクがありません",
+          "priority": "low"
+        }
+      ]
+    },
+    {
+      "lang": "en",
+      "slug": "business-efficiency-ai",
+      "title": "AI-Powered Business Efficiency: Project Management and Document Automation",
+      "score": 85,
+      "metrics": {
+        "titleLength": 74,
+        "descriptionLength": 144,
+        "keywordDensity": 2.2222222222222223,
+        "wordCount": 495,
+        "hasImages": false,
+        "internalLinks": 0,
+        "h1Count": 1,
+        "h2Count": 7
+      },
+      "recommendations": [
+        {
+          "type": "warning",
+          "message": "タイトルが長すぎます（60文字以下推奨）",
+          "priority": "medium"
+        },
+        {
+          "type": "info",
+          "message": "内部リンクがありません",
+          "priority": "low"
+        }
+      ]
+    },
+    {
+      "lang": "en",
+      "slug": "chatgpt-vs-claude-comparison",
+      "title": "ChatGPT vs Claude vs Gemini: Which AI Offers the Best Value?",
+      "score": 85,
+      "metrics": {
+        "titleLength": 60,
+        "descriptionLength": 131,
+        "keywordDensity": 12.290502793296088,
+        "wordCount": 179,
+        "hasImages": false,
+        "internalLinks": 0,
+        "h1Count": 1,
+        "h2Count": 4
+      },
+      "recommendations": [
+        {
+          "type": "warning",
+          "message": "キーワード密度が高すぎます（1-3%推奨）",
+          "priority": "high"
+        },
+        {
+          "type": "info",
+          "message": "内部リンクがありません",
+          "priority": "low"
+        }
+      ]
+    },
+    {
+      "lang": "th",
+      "slug": "2025-12-17-------------ai------------github-copilot-vs-cursor-vs-codeium",
+      "title": "เปรียบเทียบ AI สร้างโค้ด: GitHub Copilot vs Cursor vs Codeium",
+      "score": 75,
+      "metrics": {
+        "titleLength": 61,
+        "descriptionLength": 147,
+        "keywordDensity": 10.256410256410255,
+        "wordCount": 117,
+        "hasImages": false,
+        "internalLinks": 0,
+        "h1Count": 1,
+        "h2Count": 4
+      },
+      "recommendations": [
+        {
+          "type": "warning",
+          "message": "タイトルが長すぎます（60文字以下推奨）",
+          "priority": "medium"
+        },
+        {
+          "type": "warning",
+          "message": "キーワード密度が高すぎます（1-3%推奨）",
+          "priority": "high"
+        },
+        {
+          "type": "info",
+          "message": "内部リンクがありません",
+          "priority": "low"
+        }
+      ]
+    },
+    {
+      "lang": "th",
+      "slug": "2025-12-17-ai-news-anthropic-claude-3-5--------",
+      "title": "[ข่าวด่วน AI] Anthropic、Claude 3.5の性能向上を報告",
+      "score": 85,
+      "metrics": {
+        "titleLength": 42,
+        "descriptionLength": 55,
+        "keywordDensity": 2.4691358024691357,
+        "wordCount": 81,
+        "hasImages": false,
+        "internalLinks": 0,
+        "h1Count": 1,
+        "h2Count": 5
+      },
+      "recommendations": [
+        {
+          "type": "warning",
+          "message": "説明文が短すぎます（120文字以上推奨）",
+          "priority": "medium"
+        },
+        {
+          "type": "info",
+          "message": "内部リンクがありません",
+          "priority": "low"
+        }
+      ]
+    },
+    {
+      "lang": "th",
+      "slug": "2025-12-17-chatgpt-vs-claude-vs-gemini---------------------------2025",
+      "title": "ChatGPT vs Claude vs Gemini: เปรียบเทียบฟีเจอร์ล่าสุด 2025",
+      "score": 85,
+      "metrics": {
+        "titleLength": 58,
+        "descriptionLength": 144,
+        "keywordDensity": 8.108108108108109,
+        "wordCount": 111,
+        "hasImages": false,
+        "internalLinks": 0,
+        "h1Count": 1,
+        "h2Count": 4
+      },
+      "recommendations": [
+        {
+          "type": "warning",
+          "message": "キーワード密度が高すぎます（1-3%推奨）",
+          "priority": "high"
+        },
+        {
+          "type": "info",
+          "message": "内部リンクがありません",
+          "priority": "low"
+        }
+      ]
+    },
+    {
+      "lang": "th",
+      "slug": "2025-12-17-claude-pro-review",
+      "title": "รีวิว Claude Pro 2025: ฟีเจอร์ ราคา และวิธีใช้งาน",
+      "score": 75,
+      "metrics": {
+        "titleLength": 49,
+        "descriptionLength": 68,
+        "keywordDensity": 8.527131782945736,
+        "wordCount": 129,
+        "hasImages": false,
+        "internalLinks": 0,
+        "h1Count": 1,
+        "h2Count": 6
+      },
+      "recommendations": [
+        {
+          "type": "warning",
+          "message": "説明文が短すぎます（120文字以上推奨）",
+          "priority": "medium"
+        },
+        {
+          "type": "warning",
+          "message": "キーワード密度が高すぎます（1-3%推奨）",
+          "priority": "high"
+        },
+        {
+          "type": "info",
+          "message": "内部リンクがありません",
+          "priority": "low"
+        }
+      ]
+    },
+    {
+      "lang": "th",
+      "slug": "2025-12-17-github-copilot-review",
+      "title": "รีวิว GitHub Copilot 2025: ฟีเจอร์ ราคา และวิธีใช้งาน",
+      "score": 75,
+      "metrics": {
+        "titleLength": 53,
+        "descriptionLength": 72,
+        "keywordDensity": 8.527131782945736,
+        "wordCount": 129,
+        "hasImages": false,
+        "internalLinks": 0,
+        "h1Count": 1,
+        "h2Count": 6
+      },
+      "recommendations": [
+        {
+          "type": "warning",
+          "message": "説明文が短すぎます（120文字以上推奨）",
+          "priority": "medium"
+        },
+        {
+          "type": "warning",
+          "message": "キーワード密度が高すぎます（1-3%推奨）",
+          "priority": "high"
+        },
+        {
+          "type": "info",
+          "message": "内部リンクがありません",
+          "priority": "low"
+        }
+      ]
+    },
+    {
+      "lang": "th",
+      "slug": "ai-customer-support-saas",
+      "title": "เปรียบเทียบ AI Customer Support SaaS: ลดต้นทุนและปรับปรุงความพึงพอใจลูกค้า",
+      "score": 65,
+      "metrics": {
+        "titleLength": 74,
+        "descriptionLength": 114,
+        "keywordDensity": 6.666666666666667,
+        "wordCount": 180,
+        "hasImages": false,
+        "internalLinks": 0,
+        "h1Count": 1,
+        "h2Count": 6
+      },
+      "recommendations": [
+        {
+          "type": "warning",
+          "message": "タイトルが長すぎます（60文字以下推奨）",
+          "priority": "medium"
+        },
+        {
+          "type": "warning",
+          "message": "説明文が短すぎます（120文字以上推奨）",
+          "priority": "medium"
+        },
+        {
+          "type": "warning",
+          "message": "キーワード密度が高すぎます（1-3%推奨）",
+          "priority": "high"
+        },
+        {
+          "type": "info",
+          "message": "内部リンクがありません",
+          "priority": "low"
+        }
+      ]
+    },
+    {
+      "lang": "th",
+      "slug": "ai-writing-saas-comparison",
+      "title": "เปรียบเทียบ AI Writing SaaS อย่างครอบคลุม: เพิ่มรายได้จากธุรกิจเสริม",
+      "score": 65,
+      "metrics": {
+        "titleLength": 68,
+        "descriptionLength": 94,
+        "keywordDensity": 8.552631578947368,
+        "wordCount": 152,
+        "hasImages": false,
+        "internalLinks": 0,
+        "h1Count": 1,
+        "h2Count": 4
+      },
+      "recommendations": [
+        {
+          "type": "warning",
+          "message": "タイトルが長すぎます（60文字以下推奨）",
+          "priority": "medium"
+        },
+        {
+          "type": "warning",
+          "message": "説明文が短すぎます（120文字以上推奨）",
+          "priority": "medium"
+        },
+        {
+          "type": "warning",
+          "message": "キーワード密度が高すぎます（1-3%推奨）",
+          "priority": "high"
+        },
+        {
+          "type": "info",
+          "message": "内部リンクがありません",
+          "priority": "low"
+        }
+      ]
+    },
+    {
+      "lang": "th",
+      "slug": "business-efficiency-ai",
+      "title": "ใช้ AI เพิ่มประสิทธิภาพธุรกิจ: การจัดการโครงการและการสร้างเอกสารอัตโนมัติ",
+      "score": 65,
+      "metrics": {
+        "titleLength": 73,
+        "descriptionLength": 117,
+        "keywordDensity": 5.405405405405405,
+        "wordCount": 222,
+        "hasImages": false,
+        "internalLinks": 0,
+        "h1Count": 1,
+        "h2Count": 7
+      },
+      "recommendations": [
+        {
+          "type": "warning",
+          "message": "タイトルが長すぎます（60文字以下推奨）",
+          "priority": "medium"
+        },
+        {
+          "type": "warning",
+          "message": "説明文が短すぎます（120文字以上推奨）",
+          "priority": "medium"
+        },
+        {
+          "type": "warning",
+          "message": "キーワード密度が高すぎます（1-3%推奨）",
+          "priority": "high"
+        },
+        {
+          "type": "info",
+          "message": "内部リンクがありません",
+          "priority": "low"
+        }
+      ]
+    },
+    {
+      "lang": "th",
+      "slug": "chatgpt-vs-claude-comparison",
+      "title": "ChatGPT vs Claude vs Gemini: AI ตัวไหนคุ้มค่าที่สุด?",
+      "score": 75,
+      "metrics": {
+        "titleLength": 52,
+        "descriptionLength": 105,
+        "keywordDensity": 18.548387096774192,
+        "wordCount": 124,
+        "hasImages": false,
+        "internalLinks": 0,
+        "h1Count": 1,
+        "h2Count": 4
+      },
+      "recommendations": [
+        {
+          "type": "warning",
+          "message": "説明文が短すぎます（120文字以上推奨）",
+          "priority": "medium"
+        },
+        {
+          "type": "warning",
+          "message": "キーワード密度が高すぎます（1-3%推奨）",
+          "priority": "high"
+        },
+        {
+          "type": "info",
+          "message": "内部リンクがありません",
+          "priority": "low"
+        }
+      ]
+    }
+  ]
+}

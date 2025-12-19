@@ -1,0 +1,158 @@
+name: PDCA Optimization
+
+on:
+  schedule:
+    # 毎週月曜日の午前8時（JST）に実行
+    - cron: '0 23 * * 0'
+  workflow_dispatch:
+    inputs:
+      force_analysis:
+        description: 'Force run PDCA analysis'
+        required: false
+        default: 'false'
+
+jobs:
+  pdca-analysis:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: npm ci
+      
+    - name: Run PDCA Analysis
+      run: node scripts/pdca-analyzer.js
+      
+    - name: Upload optimization config
+      uses: actions/upload-artifact@v4
+      with:
+        name: optimization-config-${{ github.run_number }}
+        path: data/optimization-config.json
+        retention-days: 30
+        
+    - name: Upload performance history
+      uses: actions/upload-artifact@v4
+      with:
+        name: performance-history-${{ github.run_number }}
+        path: data/performance-history.json
+        retention-days: 90
+        
+    - name: Check optimization impact
+      id: impact-check
+      run: |
+        if [ -f data/optimization-config.json ]; then
+          CATEGORY=$(node -e "
+            const config = require('./data/optimization-config.json');
+            console.log(config.targetCategory || 'N/A');
+          ")
+          WORD_COUNT=$(node -e "
+            const config = require('./data/optimization-config.json');
+            console.log(config.optimalWordCount || 'N/A');
+          ")
+          
+          echo "category=$CATEGORY" >> $GITHUB_OUTPUT
+          echo "wordCount=$WORD_COUNT" >> $GITHUB_OUTPUT
+          
+          echo "✅ PDCA最適化設定を更新しました"
+          echo "推奨カテゴリ: $CATEGORY"
+          echo "最適文字数: $WORD_COUNT"
+        else
+          echo "❌ 最適化設定の生成に失敗しました"
+          exit 1
+        fi
+        
+    - name: Commit optimization config
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        
+        if [ -f data/optimization-config.json ]; then
+          git add data/optimization-config.json
+          git add data/performance-history.json
+          
+          if git diff --staged --quiet; then
+            echo "変更がありません"
+          else
+            git commit -m "🔄 PDCA最適化設定を更新
+
+            - 推奨カテゴリ: ${{ steps.impact-check.outputs.category }}
+            - 最適文字数: ${{ steps.impact-check.outputs.wordCount }}文字
+            - 更新日時: $(date -u +"%Y-%m-%d %H:%M:%S UTC")
+            
+            [skip ci]"
+            git push
+          fi
+        fi
+        
+    - name: Create optimization report
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const fs = require('fs');
+          
+          let configData = {};
+          let historyData = {};
+          
+          try {
+            if (fs.existsSync('data/optimization-config.json')) {
+              configData = JSON.parse(fs.readFileSync('data/optimization-config.json', 'utf8'));
+            }
+            if (fs.existsSync('data/performance-history.json')) {
+              historyData = JSON.parse(fs.readFileSync('data/performance-history.json', 'utf8'));
+            }
+          } catch (error) {
+            console.error('設定ファイルの読み込みエラー:', error);
+          }
+          
+          const issueBody = `
+          ## PDCA最適化レポート 🔄
+          
+          **実行日時**: ${new Date().toISOString()}
+          **データ期間**: ${historyData.length || 0}日分
+          
+          ### 最適化設定
+          - **推奨カテゴリ**: ${configData.targetCategory || 'N/A'}
+          - **最適文字数**: ${configData.optimalWordCount || 'N/A'}文字
+          - **優先キーワード**: ${(configData.priorityKeywords || []).join(', ') || 'N/A'}
+          
+          ### 成功パターン
+          ${(configData.contentStrategy?.successPatterns || ['データ不足']).map(pattern => 
+            `- ${pattern}`
+          ).join('\n')}
+          
+          ### 改善フォーカス
+          ${(configData.contentStrategy?.improvementFocus || ['データ収集中']).map(focus => 
+            `- ${focus}`
+          ).join('\n')}
+          
+          ### 次回記事生成への影響
+          - 記事カテゴリが自動最適化されます
+          - キーワード選定が改善されます
+          - 文字数が最適化されます
+          
+          ---
+          *このレポートは自動生成されました。次回の記事生成から新しい設定が適用されます。*
+          `;
+          
+          github.rest.issues.create({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            title: `PDCA最適化完了: ${new Date().toISOString().split('T')[0]}`,
+            body: issueBody,
+            labels: ['pdca', 'optimization', 'automated']
+          });
+          
+    - name: Optimization summary
+      run: |
+        echo "🔄 PDCA最適化完了"
+        echo "推奨カテゴリ: ${{ steps.impact-check.outputs.category }}"
+        echo "最適文字数: ${{ steps.impact-check.outputs.wordCount }}文字"
+        echo "次回記事生成から新設定が適用されます"

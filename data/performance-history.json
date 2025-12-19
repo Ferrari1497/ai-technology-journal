@@ -1,0 +1,528 @@
+[
+  {
+    "date": "2025-12-17",
+    "pageViews": 4426,
+    "revenue": 1266,
+    "seoScore": 88,
+    "engagementRate": 30.61072682930734,
+    "bounceRate": 58.23712349534024,
+    "avgTimeOnPage": 150.80305796420183,
+    "posts": [
+      {
+        "id": "2025-12-16-ai-------------------",
+        "title": "AI営業支援ツール：成約率向上の実証データ",
+        "category": "SaaS紹介",
+        "tags": [
+          "AI",
+          "比較",
+          "おすすめ",
+          "料金",
+          "導入事例"
+        ],
+        "wordCount": 203,
+        "lang": "ja",
+        "pageViews": 576,
+        "revenue": 469,
+        "seoScore": 72
+      },
+      {
+        "id": "2025-12-17-ai-------------------------",
+        "title": "AIライティングツール徹底比較：料金・精度・使いやすさ",
+        "category": "生成AIツール比較",
+        "tags": [
+          "AI",
+          "比較",
+          "おすすめ",
+          "料金",
+          "導入事例"
+        ],
+        "wordCount": 85,
+        "lang": "ja",
+        "pageViews": 910,
+        "revenue": 128,
+        "seoScore": 77
+      },
+      {
+        "id": "2025-12-17-ai-news-anthropic-claude-3-5--------",
+        "title": "【AIニュース速報】Anthropic、Claude 3.5の性能向上を報告",
+        "category": "AIニュース",
+        "tags": [
+          "AIニュース",
+          "速報",
+          "最新情報",
+          "業界動向"
+        ],
+        "wordCount": 99,
+        "lang": "ja",
+        "pageViews": 502,
+        "revenue": 341,
+        "seoScore": 80
+      },
+      {
+        "id": "2025-12-17-chatgpt-vs-claude-vs-gemini-2025-------",
+        "title": "ChatGPT vs Claude vs Gemini：2025年最新機能比較",
+        "category": "生成AIツール比較",
+        "tags": [
+          "AI",
+          "比較",
+          "おすすめ",
+          "料金",
+          "導入事例"
+        ],
+        "wordCount": 105,
+        "lang": "ja",
+        "pageViews": 281,
+        "revenue": 356,
+        "seoScore": 99
+      },
+      {
+        "id": "2025-12-17-claude-pro-review",
+        "title": "Claude Proの使い方と料金プラン：2025年最新レビュー",
+        "category": "おすすめツール",
+        "tags": [
+          "Claude Pro",
+          "AIツール",
+          "レビュー",
+          "料金",
+          "使い方"
+        ],
+        "wordCount": 176,
+        "lang": "ja",
+        "pageViews": 577,
+        "revenue": 267,
+        "seoScore": 92
+      },
+      {
+        "id": "2025-12-17-ai-news-anthropic-claude-3-5--------",
+        "title": "[AI News Flash] Anthropic、Claude 3.5の性能向上を報告",
+        "category": "AI News",
+        "tags": [
+          "AI News",
+          "Breaking",
+          "Latest",
+          "Industry Trends"
+        ],
+        "wordCount": 222,
+        "lang": "en",
+        "pageViews": 467,
+        "revenue": 358,
+        "seoScore": 68
+      },
+      {
+        "id": "2025-12-17-chatgpt-vs-claude-vs-gemini--2025-latest-feature-comparison",
+        "title": "ChatGPT vs Claude vs Gemini: 2025 Latest Feature Comparison",
+        "category": "AI Tools Comparison",
+        "tags": [
+          "AI",
+          "Comparison",
+          "Recommended",
+          "Pricing",
+          "Case Studies"
+        ],
+        "wordCount": 247,
+        "lang": "en",
+        "pageViews": 851,
+        "revenue": 264,
+        "seoScore": 85
+      },
+      {
+        "id": "2025-12-17-claude-pro-review",
+        "title": "Claude Pro Review 2025: Features, Pricing & How to Use",
+        "category": "Recommended Tools",
+        "tags": [
+          "Claude Pro",
+          "AI Tools",
+          "Review",
+          "Pricing",
+          "Guide"
+        ],
+        "wordCount": 370,
+        "lang": "en",
+        "pageViews": 340,
+        "revenue": 129,
+        "seoScore": 62
+      },
+      {
+        "id": "2025-12-17-code-generation-ai-comparison--github-copilot-vs-cursor-vs-codeium",
+        "title": "Code Generation AI Comparison: GitHub Copilot vs Cursor vs Codeium",
+        "category": "AI Tools Comparison",
+        "tags": [
+          "AI",
+          "Comparison",
+          "Recommended",
+          "Pricing",
+          "Case Studies"
+        ],
+        "wordCount": 252,
+        "lang": "en",
+        "pageViews": 225,
+        "revenue": 397,
+        "seoScore": 91
+      },
+      {
+        "id": "2025-12-17-github-copilot-review",
+        "title": "GitHub Copilot Review 2025: Features, Pricing & How to Use",
+        "category": "Recommended Tools",
+        "tags": [
+          "GitHub Copilot",
+          "AI Tools",
+          "Review",
+          "Pricing",
+          "Guide"
+        ],
+        "wordCount": 370,
+        "lang": "en",
+        "pageViews": 1009,
+        "revenue": 87,
+        "seoScore": 63
+      },
+      {
+        "id": "2025-12-17-------------ai------------github-copilot-vs-cursor-vs-codeium",
+        "title": "เปรียบเทียบ AI สร้างโค้ด: GitHub Copilot vs Cursor vs Codeium",
+        "category": "เปรียบเทียบเครื่องมือ AI",
+        "tags": [
+          "AI",
+          "เปรียบเทียบ",
+          "แนะนำ",
+          "ราคา",
+          "กรณีศึกษา"
+        ],
+        "wordCount": 155,
+        "lang": "th",
+        "pageViews": 810,
+        "revenue": 326,
+        "seoScore": 72
+      },
+      {
+        "id": "2025-12-17-ai-news-anthropic-claude-3-5--------",
+        "title": "[ข่าวด่วน AI] Anthropic、Claude 3.5の性能向上を報告",
+        "category": "ข่าว AI",
+        "tags": [
+          "ข่าว AI",
+          "ข่าวด่วน",
+          "ข้อมูลล่าสุด",
+          "แนวโน้มอุตสาหกรรม"
+        ],
+        "wordCount": 103,
+        "lang": "th",
+        "pageViews": 679,
+        "revenue": 332,
+        "seoScore": 60
+      },
+      {
+        "id": "2025-12-17-chatgpt-vs-claude-vs-gemini---------------------------2025",
+        "title": "ChatGPT vs Claude vs Gemini: เปรียบเทียบฟีเจอร์ล่าสุด 2025",
+        "category": "เปรียบเทียบเครื่องมือ AI",
+        "tags": [
+          "AI",
+          "เปรียบเทียบ",
+          "แนะนำ",
+          "ราคา",
+          "กรณีศึกษา"
+        ],
+        "wordCount": 145,
+        "lang": "th",
+        "pageViews": 848,
+        "revenue": 350,
+        "seoScore": 76
+      },
+      {
+        "id": "2025-12-17-claude-pro-review",
+        "title": "รีวิว Claude Pro 2025: ฟีเจอร์ ราคา และวิธีใช้งาน",
+        "category": "เครื่องมือแนะนำ",
+        "tags": [
+          "Claude Pro",
+          "เครื่องมือ AI",
+          "รีวิว",
+          "ราคา",
+          "คู่มือ"
+        ],
+        "wordCount": 160,
+        "lang": "th",
+        "pageViews": 213,
+        "revenue": 544,
+        "seoScore": 68
+      },
+      {
+        "id": "2025-12-17-github-copilot-review",
+        "title": "รีวิว GitHub Copilot 2025: ฟีเจอร์ ราคา และวิธีใช้งาน",
+        "category": "เครื่องมือแนะนำ",
+        "tags": [
+          "GitHub Copilot",
+          "เครื่องมือ AI",
+          "รีวิว",
+          "ราคา",
+          "คู่มือ"
+        ],
+        "wordCount": 160,
+        "lang": "th",
+        "pageViews": 633,
+        "revenue": 274,
+        "seoScore": 95
+      }
+    ]
+  },
+  {
+    "date": "2025-12-17",
+    "pageViews": 1237,
+    "revenue": 1456,
+    "seoScore": 97,
+    "engagementRate": 42.57932183861093,
+    "bounceRate": 55.43251060608152,
+    "avgTimeOnPage": 236.52137017930102,
+    "posts": [
+      {
+        "id": "2025-12-16-ai-------------------",
+        "title": "AI営業支援ツール：成約率向上の実証データ",
+        "category": "SaaS紹介",
+        "tags": [
+          "AI",
+          "比較",
+          "おすすめ",
+          "料金",
+          "導入事例"
+        ],
+        "wordCount": 203,
+        "lang": "ja",
+        "pageViews": 232,
+        "revenue": 326,
+        "seoScore": 73
+      },
+      {
+        "id": "2025-12-17-ai-------------------------",
+        "title": "AIライティングツール徹底比較：料金・精度・使いやすさ",
+        "category": "生成AIツール比較",
+        "tags": [
+          "AI",
+          "比較",
+          "おすすめ",
+          "料金",
+          "導入事例"
+        ],
+        "wordCount": 85,
+        "lang": "ja",
+        "pageViews": 1050,
+        "revenue": 159,
+        "seoScore": 93
+      },
+      {
+        "id": "2025-12-17-ai---chatgpt-vs-claude-vs-gemini-2025-------",
+        "title": "AI活用のChatGPT vs Claude vs Gemini：2025年最新機能比較",
+        "category": "生成AIツール比較",
+        "tags": [
+          "AI",
+          "比較",
+          "おすすめ",
+          "料金",
+          "導入事例"
+        ],
+        "wordCount": 201,
+        "lang": "ja",
+        "pageViews": 643,
+        "revenue": 503,
+        "seoScore": 69
+      },
+      {
+        "id": "2025-12-17-ai-news-anthropic-claude-3-5--------",
+        "title": "【AIニュース速報】Anthropic、Claude 3.5の性能向上を報告",
+        "category": "AIニュース",
+        "tags": [
+          "AIニュース",
+          "速報",
+          "最新情報",
+          "業界動向"
+        ],
+        "wordCount": 99,
+        "lang": "ja",
+        "pageViews": 263,
+        "revenue": 308,
+        "seoScore": 81
+      },
+      {
+        "id": "2025-12-17-chatgpt-vs-claude-vs-gemini-2025-------",
+        "title": "ChatGPT vs Claude vs Gemini：2025年最新機能比較",
+        "category": "生成AIツール比較",
+        "tags": [
+          "AI",
+          "比較",
+          "おすすめ",
+          "料金",
+          "導入事例"
+        ],
+        "wordCount": 105,
+        "lang": "ja",
+        "pageViews": 864,
+        "revenue": 221,
+        "seoScore": 71
+      },
+      {
+        "id": "2025-12-17-ai-news-anthropic-claude-3-5--------",
+        "title": "[AI News Flash] Anthropic、Claude 3.5の性能向上を報告",
+        "category": "AI News",
+        "tags": [
+          "AI News",
+          "Breaking",
+          "Latest",
+          "Industry Trends"
+        ],
+        "wordCount": 222,
+        "lang": "en",
+        "pageViews": 896,
+        "revenue": 217,
+        "seoScore": 78
+      },
+      {
+        "id": "2025-12-17-chatgpt-vs-claude-vs-gemini--2025-latest-feature-comparison",
+        "title": "ChatGPT vs Claude vs Gemini: 2025 Latest Feature Comparison",
+        "category": "AI Tools Comparison",
+        "tags": [
+          "AI",
+          "Comparison",
+          "Recommended",
+          "Pricing",
+          "Case Studies"
+        ],
+        "wordCount": 247,
+        "lang": "en",
+        "pageViews": 927,
+        "revenue": 412,
+        "seoScore": 94
+      },
+      {
+        "id": "2025-12-17-claude-pro-review",
+        "title": "Claude Pro Review 2025: Features, Pricing & How to Use",
+        "category": "Recommended Tools",
+        "tags": [
+          "Claude Pro",
+          "AI Tools",
+          "Review",
+          "Pricing",
+          "Guide"
+        ],
+        "wordCount": 370,
+        "lang": "en",
+        "pageViews": 473,
+        "revenue": 165,
+        "seoScore": 96
+      },
+      {
+        "id": "2025-12-17-code-generation-ai-comparison--github-copilot-vs-cursor-vs-codeium",
+        "title": "Code Generation AI Comparison: GitHub Copilot vs Cursor vs Codeium",
+        "category": "AI Tools Comparison",
+        "tags": [
+          "AI",
+          "Comparison",
+          "Recommended",
+          "Pricing",
+          "Case Studies"
+        ],
+        "wordCount": 252,
+        "lang": "en",
+        "pageViews": 690,
+        "revenue": 483,
+        "seoScore": 85
+      },
+      {
+        "id": "2025-12-17-github-copilot-review",
+        "title": "GitHub Copilot Review 2025: Features, Pricing & How to Use",
+        "category": "Recommended Tools",
+        "tags": [
+          "GitHub Copilot",
+          "AI Tools",
+          "Review",
+          "Pricing",
+          "Guide"
+        ],
+        "wordCount": 370,
+        "lang": "en",
+        "pageViews": 112,
+        "revenue": 124,
+        "seoScore": 82
+      },
+      {
+        "id": "2025-12-17-------------ai------------github-copilot-vs-cursor-vs-codeium",
+        "title": "เปรียบเทียบ AI สร้างโค้ด: GitHub Copilot vs Cursor vs Codeium",
+        "category": "เปรียบเทียบเครื่องมือ AI",
+        "tags": [
+          "AI",
+          "เปรียบเทียบ",
+          "แนะนำ",
+          "ราคา",
+          "กรณีศึกษา"
+        ],
+        "wordCount": 155,
+        "lang": "th",
+        "pageViews": 834,
+        "revenue": 85,
+        "seoScore": 96
+      },
+      {
+        "id": "2025-12-17-ai-news-anthropic-claude-3-5--------",
+        "title": "[ข่าวด่วน AI] Anthropic、Claude 3.5の性能向上を報告",
+        "category": "ข่าว AI",
+        "tags": [
+          "ข่าว AI",
+          "ข่าวด่วน",
+          "ข้อมูลล่าสุด",
+          "แนวโน้มอุตสาหกรรม"
+        ],
+        "wordCount": 103,
+        "lang": "th",
+        "pageViews": 306,
+        "revenue": 464,
+        "seoScore": 81
+      },
+      {
+        "id": "2025-12-17-chatgpt-vs-claude-vs-gemini---------------------------2025",
+        "title": "ChatGPT vs Claude vs Gemini: เปรียบเทียบฟีเจอร์ล่าสุด 2025",
+        "category": "เปรียบเทียบเครื่องมือ AI",
+        "tags": [
+          "AI",
+          "เปรียบเทียบ",
+          "แนะนำ",
+          "ราคา",
+          "กรณีศึกษา"
+        ],
+        "wordCount": 145,
+        "lang": "th",
+        "pageViews": 368,
+        "revenue": 358,
+        "seoScore": 82
+      },
+      {
+        "id": "2025-12-17-claude-pro-review",
+        "title": "รีวิว Claude Pro 2025: ฟีเจอร์ ราคา และวิธีใช้งาน",
+        "category": "เครื่องมือแนะนำ",
+        "tags": [
+          "Claude Pro",
+          "เครื่องมือ AI",
+          "รีวิว",
+          "ราคา",
+          "คู่มือ"
+        ],
+        "wordCount": 160,
+        "lang": "th",
+        "pageViews": 1067,
+        "revenue": 150,
+        "seoScore": 74
+      },
+      {
+        "id": "2025-12-17-github-copilot-review",
+        "title": "รีวิว GitHub Copilot 2025: ฟีเจอร์ ราคา และวิธีใช้งาน",
+        "category": "เครื่องมือแนะนำ",
+        "tags": [
+          "GitHub Copilot",
+          "เครื่องมือ AI",
+          "รีวิว",
+          "ราคา",
+          "คู่มือ"
+        ],
+        "wordCount": 160,
+        "lang": "th",
+        "pageViews": 706,
+        "revenue": 72,
+        "seoScore": 79
+      }
+    ]
+  }
+]

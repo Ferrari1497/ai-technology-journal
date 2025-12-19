@@ -1,0 +1,136 @@
+name: Daily Article Generation
+
+on:
+  schedule:
+    - cron: '0 9 * * *'  # 毎日午前9時（JST 18時）に実行
+  workflow_dispatch:  # 手動実行も可能
+
+permissions:
+  contents: write
+
+jobs:
+  generate-article:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        
+    - name: Install dependencies
+      run: npm install
+      
+    - name: Debug - Check environment and directories
+      run: |
+        echo "🔍 Environment Debug Information:"
+        echo "Current directory: $(pwd)"
+        echo "Node.js version: $(node --version)"
+        echo "NPM version: $(npm --version)"
+        echo "Date: $(date)"
+        echo "Timezone: $(date +%Z)"
+        echo ""
+        echo "📁 Directory structure:"
+        ls -la
+        echo ""
+        echo "📁 Posts directory structure:"
+        ls -la posts/ || echo "Posts directory not found"
+        ls -la posts/ja/ || echo "posts/ja/ directory not found"
+        ls -la posts/en/ || echo "posts/en/ directory not found"
+        ls -la posts/th/ || echo "posts/th/ directory not found"
+        echo ""
+        echo "🔑 Environment variables check:"
+        echo "OPENAI_API_KEY set: $([[ -n "$OPENAI_API_KEY" ]] && echo "Yes" || echo "No")"
+        echo "OPENAI_API_KEY length: ${#OPENAI_API_KEY}"
+        
+    - name: Generate daily multilingual articles
+      run: |
+        echo "🚀 Starting article generation..."
+        echo "Script path: scripts/generate-multilang-article.js"
+        echo "Script exists: $([ -f scripts/generate-multilang-article.js ] && echo "Yes" || echo "No")"
+        echo ""
+        node scripts/generate-multilang-article.js
+        echo "📝 Article generation script completed with exit code: $?"
+      env:
+        OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        
+    - name: Detailed file check after generation
+      run: |
+        echo "📊 Detailed file check after generation:"
+        echo "Current date: $(date +'%Y-%m-%d')"
+        echo ""
+        echo "📁 All files in posts/ja/:"
+        ls -la posts/ja/ || echo "posts/ja/ directory not accessible"
+        echo ""
+        echo "📁 All files in posts/en/:"
+        ls -la posts/en/ || echo "posts/en/ directory not accessible"
+        echo ""
+        echo "📁 All files in posts/th/:"
+        ls -la posts/th/ || echo "posts/th/ directory not accessible"
+        echo ""
+        echo "🔍 Looking for today's files:"
+        find posts/ -name "*$(date +'%Y-%m-%d')*" -type f 2>/dev/null || echo "No files found for today"
+        echo ""
+        echo "🔍 All markdown files in posts/:"
+        find posts/ -name "*.md" -type f 2>/dev/null || echo "No markdown files found"
+        echo ""
+        echo "📈 File count by directory:"
+        echo "posts/ja/: $(ls -1 posts/ja/ 2>/dev/null | wc -l) files"
+        echo "posts/en/: $(ls -1 posts/en/ 2>/dev/null | wc -l) files"
+        echo "posts/th/: $(ls -1 posts/th/ 2>/dev/null | wc -l) files"
+        echo ""
+        echo "🔄 Git status after generation:"
+        git status --porcelain
+        echo ""
+        echo "📋 Git status (detailed):"
+        git status
+      
+    - name: Commit and push changes with detailed logging
+      run: |
+        echo "🔧 Git configuration:"
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        echo "User: $(git config user.name) <$(git config user.email)>"
+        echo ""
+        echo "📝 Adding files to git:"
+        git add posts/
+        echo "Files added to staging area"
+        echo ""
+        echo "🔍 Git diff --staged:"
+        git diff --staged --name-only
+        echo ""
+        echo "📊 Git diff --staged --stat:"
+        git diff --staged --stat
+        echo ""
+        if git diff --staged --quiet; then
+          echo "❌ No changes to commit - no files were generated or modified"
+          echo "🔍 Final directory check:"
+          find posts/ -type f -name "*.md" -exec ls -la {} \;
+        else
+          echo "✅ Changes detected, committing..."
+          git commit -m "Add daily article $(date +'%Y-%m-%d')"
+          echo "📤 Pushing to repository..."
+          git push origin main
+          echo "✅ Successfully pushed changes"
+        fi
+        
+    - name: Build Next.js
+      run: npx next build
+      env:
+        NEXT_PUBLIC_SITE_URL: http://ai-tech-journal-staging-1766039463.s3-website-ap-northeast-1.amazonaws.com
+        NEXT_PUBLIC_ENVIRONMENT: staging
+        
+
+        
+    - name: Deploy to S3
+      run: |
+        aws s3 sync out/ s3://${{ secrets.S3_BUCKET_STAGING }} --delete
+        echo "✅ Deployment completed successfully"
+        echo "🌐 Staging URL: http://ai-tech-journal-staging-1766039463.s3-website-ap-northeast-1.amazonaws.com"
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_DEFAULT_REGION: ap-northeast-1

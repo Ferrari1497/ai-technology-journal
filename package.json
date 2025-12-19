@@ -1,0 +1,46 @@
+{
+  "name": "ai-technology-journal",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "export": "next build",
+    "generate-article": "node scripts/generate-article.js",
+    "generate-enhanced-article": "node scripts/openai-article-generator.js",
+    "generate-multilang-article": "node scripts/generate-multilang-article.js",
+    "generate-tool-article": "node scripts/generate-tool-article.js",
+    "generate-ai-news": "node scripts/generate-ai-news.js",
+    "send-revenue-report": "node scripts/send-revenue-report.js",
+    "generate-seo-files": "node scripts/generate-sitemap.js",
+    "deploy:staging": "./scripts/deploy.sh staging",
+    "deploy:production": "./scripts/deploy.sh production",
+    "health-check": "node scripts/health-check.js",
+    "pre-deploy": "node scripts/pre-deploy.js",
+    "post-deploy": "node scripts/post-deploy.js",
+    "pdca-analysis": "node scripts/pdca-analyzer.js",
+    "staging:setup": "node scripts/setup-staging-content.js",
+    "staging:clear": "node scripts/clear-staging-posts.js",
+    "staging:daily": "node scripts/generate-staging-articles.js daily",
+    "staging:news": "node scripts/generate-staging-articles.js news",
+    "staging:tools": "node scripts/generate-staging-articles.js tools",
+    "staging:all": "node scripts/generate-staging-articles.js all",
+    "staging:auth": "node scripts/setup-basic-auth.js"
+  },
+  "dependencies": {
+    "next": "^14.0.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "gray-matter": "^4.0.3",
+    "remark": "^15.0.1",
+    "remark-html": "^16.0.1",
+    "openai": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "typescript": "^5.0.0"
+  }
+}

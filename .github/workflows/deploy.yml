@@ -1,0 +1,82 @@
+name: Deploy to AWS
+
+on:
+  push:
+    branches: [ main, staging ]
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Target environment'
+        required: true
+        default: 'staging'
+        type: choice
+        options:
+        - staging
+        - production
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: npm ci
+      
+    - name: Pre-deploy checks
+      run: node scripts/pre-deploy.js
+      env:
+        SKIP_PRE_DEPLOY_CHECK: true
+      
+    - name: Set environment (Production)
+      if: github.ref == 'refs/heads/main' || github.event.inputs.environment == 'production'
+      run: |
+        echo "NEXT_PUBLIC_SITE_URL=https://ai-tech-journal.com" >> $GITHUB_ENV
+        echo "NEXT_PUBLIC_ENVIRONMENT=production" >> $GITHUB_ENV
+        echo "TARGET_BUCKET=${{ secrets.S3_BUCKET_PROD }}" >> $GITHUB_ENV
+        echo "CLOUDFRONT_ID=${{ secrets.CLOUDFRONT_DISTRIBUTION_ID_PROD }}" >> $GITHUB_ENV
+        
+    - name: Set environment (Staging)
+      if: github.ref == 'refs/heads/staging' || github.event.inputs.environment == 'staging'
+      run: |
+        echo "NEXT_PUBLIC_SITE_URL=https://staging.ai-tech-journal.com" >> $GITHUB_ENV
+        echo "NEXT_PUBLIC_ENVIRONMENT=staging" >> $GITHUB_ENV
+        echo "TARGET_BUCKET=${{ secrets.S3_BUCKET_STAGING }}" >> $GITHUB_ENV
+        echo "CLOUDFRONT_ID=${{ secrets.CLOUDFRONT_DISTRIBUTION_ID_STAGING }}" >> $GITHUB_ENV
+        
+    - name: Build and export
+      run: npm run build
+      env:
+        NEXT_PUBLIC_GA_ID: ${{ secrets.GA_ID_PROD }}
+        
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ap-northeast-1
+        
+    - name: Deploy to S3
+      run: |
+        aws s3 sync out/ s3://$TARGET_BUCKET --delete
+        aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_ID --paths "/*"
+        
+    - name: Wait for deployment
+      run: sleep 30
+      
+    - name: Post-deploy verification
+      run: node scripts/post-deploy.js $NEXT_PUBLIC_ENVIRONMENT
+      
+    - name: Deployment summary
+      run: |
+        echo "✅ Deployment completed and verified"
+        echo "Environment: $NEXT_PUBLIC_ENVIRONMENT"
+        echo "URL: $NEXT_PUBLIC_SITE_URL"

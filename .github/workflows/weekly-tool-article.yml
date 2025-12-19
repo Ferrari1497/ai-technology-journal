@@ -1,0 +1,36 @@
+name: Weekly Tool Article Generation
+
+on:
+  schedule:
+    - cron: '0 10 * * 1'  # 毎週月曜日午前10時（JST 19時）に実行
+  workflow_dispatch:  # 手動実行も可能
+
+permissions:
+  contents: write
+
+jobs:
+  generate-tool-article:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        
+    - name: Install dependencies
+      run: npm install
+      
+    - name: Generate weekly tool article
+      run: node scripts/generate-tool-article.js
+      
+    - name: Commit and push changes
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add posts/
+        git diff --staged --quiet || git commit -m "Add weekly tool article $(date +'%Y-%m-%d')"
+        git push origin main

@@ -1,0 +1,21 @@
+# Images Directory
+
+This directory contains images for the AI Technology Journal website.
+
+## Image Guidelines
+
+- Use optimized images (WebP format preferred)
+- Maximum width: 1200px for hero images
+- Maximum width: 800px for article images
+- Compress images to reduce file size
+- Use descriptive filenames
+
+## Placeholder Images
+
+For development, we use Picsum Photos service:
+- https://picsum.photos/800/400 for article thumbnails
+- https://picsum.photos/1200/600 for hero images
+
+## Production Images
+
+Replace placeholder images with actual content before production deployment.
