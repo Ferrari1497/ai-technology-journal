@@ -1,5 +1,6 @@
 const fs = require('fs')
 const path = require('path')
+const TitleManager = require('./title-manager')
 
 // .env.stagingファイルから環境変数を読み込み
 function loadEnvFile() {
@@ -194,6 +195,7 @@ async function generateAIPoweredArticle() {
   
   const languages = ['ja', 'en', 'th']
   const generatedFiles = []
+  const titleManager = new TitleManager()
   
   // Check if posts directory exists
   const postsBaseDir = path.join(__dirname, '..', 'posts')
@@ -216,9 +218,12 @@ async function generateAIPoweredArticle() {
       // OpenAI APIを呼び出し
       const aiContent = await callOpenAI(selectedPrompt, lang)
       
-      // タイトルを抽出
-      const title = extractTitle(aiContent, lang)
-      console.log(`📄 Extracted title: ${title}`)
+      // タイトルを抽出して重複チェック
+      const extractedTitle = extractTitle(aiContent, lang)
+      const uniqueTitle = titleManager.generateUniqueTitle(`${lang}:${extractedTitle}`)
+      const title = uniqueTitle.replace(`${lang}:`, '')
+      console.log(`📄 Extracted title: ${extractedTitle}`)
+      console.log(`📄 Unique title: ${title}`)
       
       // Markdown記事を作成
       const markdownContent = createMarkdownArticle(aiContent, title, category, lang)
@@ -261,7 +266,8 @@ async function generateAIPoweredArticle() {
       console.log(`🔄 Generating fallback article for ${lang}...`)
       const fallbackContent = `# AI技術の最新動向\n\n申し訳ございませんが、現在AI記事生成サービスに一時的な問題が発生しています。\n\n## 今後の予定\n\n- サービス復旧後に高品質な記事をお届けします\n- 最新のAI技術情報をお待ちください\n\n*このメッセージは自動生成されています。*`
       
-      const fallbackTitle = 'AI技術の最新動向'
+      const baseFallbackTitle = 'AI技術の最新動向'
+      const fallbackTitle = titleManager.generateUniqueTitle(`${lang}:${baseFallbackTitle}`).replace(`${lang}:`, '')
       const fallbackCategory = categoryMapping[lang][0]
       const markdownContent = createMarkdownArticle(fallbackContent, fallbackTitle, fallbackCategory, lang)
       
@@ -277,6 +283,7 @@ async function generateAIPoweredArticle() {
       fs.writeFileSync(filepath, markdownContent, 'utf8')
       
       console.log(`🔄 ${lang.toUpperCase()} フォールバック記事を生成しました: ${filename}`)
+      console.log(`📄 Fallback title: ${fallbackTitle}`)
       generatedFiles.push({ lang, filename, filepath, title: fallbackTitle, category: fallbackCategory })
     }
   }
@@ -290,6 +297,7 @@ async function generateAIPoweredArticle() {
   })
   
   console.log('🎉 AI-powered article generation completed!')
+  console.log(`📊 Total used titles: ${titleManager.getUsedTitlesCount()}`)
   return generatedFiles
 }
 

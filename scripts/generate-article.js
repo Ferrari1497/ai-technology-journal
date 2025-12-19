@@ -1,5 +1,6 @@
 const fs = require('fs')
 const path = require('path')
+const TitleManager = require('./title-manager')
 
 // 記事テンプレート（2000文字程度）
 const articleTemplates = [
@@ -166,17 +167,35 @@ ${title}において重要なのは、自社の課題と目標を明確にした
 
 function generateDailyArticle() {
   const today = new Date()
-  const randomTemplate = articleTemplates[Math.floor(Math.random() * articleTemplates.length)]
-  const randomTopic = randomTemplate.topics[Math.floor(Math.random() * randomTemplate.topics.length)]
+  const titleManager = new TitleManager()
   
-  const content = generateArticleContent(randomTopic, randomTemplate.category)
-  const filename = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}-${randomTopic.toLowerCase().replace(/[^a-z0-9]/g, '-')}.md`
+  let randomTemplate, randomTopic, uniqueTitle
+  let attempts = 0
+  const maxAttempts = 50
+  
+  // Try to find a unique title
+  do {
+    randomTemplate = articleTemplates[Math.floor(Math.random() * articleTemplates.length)]
+    randomTopic = randomTemplate.topics[Math.floor(Math.random() * randomTemplate.topics.length)]
+    uniqueTitle = titleManager.generateUniqueTitle(randomTopic)
+    attempts++
+  } while (uniqueTitle === randomTopic && attempts < maxAttempts)
+  
+  if (attempts >= maxAttempts) {
+    console.warn('Max attempts reached, using timestamped title')
+    uniqueTitle = `${randomTopic} - ${Date.now()}`
+    titleManager.addTitle(uniqueTitle)
+  }
+  
+  const content = generateArticleContent(uniqueTitle, randomTemplate.category)
+  const filename = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}-${uniqueTitle.toLowerCase().replace(/[^a-z0-9]/g, '-')}.md`
   
   const postsDir = path.join(__dirname, '..', 'posts')
   const filepath = path.join(postsDir, filename)
   
   fs.writeFileSync(filepath, content, 'utf8')
   console.log(`記事を生成しました: ${filename}`)
+  console.log(`使用済みタイトル数: ${titleManager.getUsedTitlesCount()}`)
   
   return filename
 }

@@ -1,5 +1,6 @@
 const fs = require('fs')
 const path = require('path')
+const TitleManager = require('./title-manager')
 
 // ツール記事テンプレート
 const toolArticleTemplates = {
@@ -243,6 +244,7 @@ function generateToolArticle() {
   
   const languages = ['ja', 'en', 'th']
   const generatedFiles = []
+  const titleManager = new TitleManager()
   
   // ランダムにツールを選択
   const randomTool = recommendedTools[Math.floor(Math.random() * recommendedTools.length)]
@@ -253,7 +255,17 @@ function generateToolArticle() {
     const features = randomTool.features[lang]
     const pricing = randomTool.pricing
     
-    const content = toolArticleTemplates[lang](toolName, category, features, pricing)
+    // Generate unique title for this tool and language
+    const baseTitle = lang === 'ja' ? `${toolName}の使い方と料金プラン：2025年最新レビュー` :
+                     lang === 'en' ? `${toolName} Review 2025: Features, Pricing & How to Use` :
+                     `รีวิว ${toolName} 2025: ฟีเจอร์ ราคา และวิธีใช้งาน`
+    
+    const uniqueTitle = titleManager.generateUniqueTitle(`${lang}:${baseTitle}`)
+    const displayTitle = uniqueTitle.replace(`${lang}:`, '')
+    
+    // Update the template to use the unique title
+    const updatedTemplate = toolArticleTemplates[lang](toolName, category, features, pricing)
+    const content = updatedTemplate.replace(baseTitle, displayTitle)
     const filename = `${new Date().toISOString().split('T')[0]}-${toolName.toLowerCase().replace(/[^a-z0-9]/g, '-')}-review.md`
     
     const postsDir = path.join(__dirname, '..', 'posts', lang)
@@ -265,7 +277,8 @@ function generateToolArticle() {
     fs.writeFileSync(filepath, content, 'utf8')
     
     console.log(`${lang.toUpperCase()}ツール記事を生成しました: ${filename}`)
-    generatedFiles.push({ lang, filename, tool: toolName })
+    console.log(`📝 Title: ${displayTitle}`)
+    generatedFiles.push({ lang, filename, tool: toolName, title: displayTitle })
   })
   
   return generatedFiles

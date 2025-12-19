@@ -29,7 +29,9 @@
     "staging:news-openai": "node scripts/generate-ai-news-openai.js",
     "staging:tools": "node scripts/generate-staging-articles.js tools",
     "staging:all": "node scripts/generate-staging-articles.js all",
-    "staging:auth": "node scripts/setup-basic-auth.js"
+    "staging:auth": "node scripts/setup-basic-auth.js",
+    "check-duplicate-titles": "node scripts/check-duplicate-titles.js",
+    "sync-existing-titles": "node scripts/sync-existing-titles.js"
   },
   "dependencies": {
     "dotenv": "^17.2.3",
