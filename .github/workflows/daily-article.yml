@@ -46,14 +46,14 @@ jobs:
         echo "OPENAI_API_KEY set: $([[ -n "$OPENAI_API_KEY" ]] && echo "Yes" || echo "No")"
         echo "OPENAI_API_KEY length: ${#OPENAI_API_KEY}"
         
-    - name: Generate daily multilingual articles
+    - name: Generate daily AI-powered articles
       run: |
-        echo "🚀 Starting article generation..."
-        echo "Script path: scripts/generate-multilang-article.js"
-        echo "Script exists: $([ -f scripts/generate-multilang-article.js ] && echo "Yes" || echo "No")"
+        echo "🚀 Starting AI-powered article generation..."
+        echo "Script path: scripts/generate-ai-powered-article.js"
+        echo "Script exists: $([ -f scripts/generate-ai-powered-article.js ] && echo "Yes" || echo "No")"
         echo ""
-        node scripts/generate-multilang-article.js
-        echo "📝 Article generation script completed with exit code: $?"
+        node scripts/generate-ai-powered-article.js
+        echo "📝 AI article generation script completed with exit code: $?"
       env:
         OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         
