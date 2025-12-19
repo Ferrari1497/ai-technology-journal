@@ -25,7 +25,9 @@ jobs:
       run: npm install
       
     - name: Generate daily AI news
-      run: node scripts/generate-ai-news.js
+      run: node scripts/generate-ai-news-openai.js
+      env:
+        OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       
     - name: Commit and push changes
       run: |

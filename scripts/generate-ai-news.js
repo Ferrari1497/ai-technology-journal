@@ -90,11 +90,11 @@ tags: ['AIニュース', '速報', '最新情報', '業界動向']
 image: 'https://picsum.photos/800/400?random=${imageId}'
 ---
 
-# 【AIニュース速報】${news.title}
+# 【AIニュース速報】${news.title.ja}
 
 ## ニュース概要
 
-${news.summary}
+${news.summary.ja}
 
 ## 詳細情報
 
@@ -114,8 +114,8 @@ ${news.summary}
 
 ## 関連ニュース
 
-${relatedNews.map(item => `### ${item.title}
-${item.summary}
+${relatedNews.map(item => `### ${item.title.ja}
+${item.summary.ja}
 **出典**: ${item.source}`).join('\n\n')}
 
 ## 業界への影響分析
@@ -132,7 +132,7 @@ ${item.summary}
 
 ## まとめ
 
-${news.title}は、AI業界の発展において重要なマイルストーンとなる可能性があります。今後の動向に注目が集まります。
+${news.title.ja}は、AI業界の発展において重要なマイルストーンとなる可能性があります。今後の動向に注目が集まります。
 
 ### 関連リンク
 - [元記事を読む](${news.url})
@@ -150,11 +150,11 @@ tags: ['AI News', 'Breaking', 'Latest', 'Industry Trends']
 image: 'https://picsum.photos/800/400?random=${imageId}'
 ---
 
-# [AI News Flash] ${news.title}
+# [AI News Flash] ${news.title.en}
 
 ## News Overview
 
-${news.summary}
+${news.summary.en}
 
 ## Detailed Information
 
@@ -174,8 +174,8 @@ This announcement is expected to bring the following changes to the AI industry:
 
 ## Related News
 
-${relatedNews.map(item => `### ${item.title}
-${item.summary}
+${relatedNews.map(item => `### ${item.title.en}
+${item.summary.en}
 **Source**: ${item.source}`).join('\n\n')}
 
 ## Industry Impact Analysis
@@ -192,7 +192,7 @@ ${item.summary}
 
 ## Summary
 
-${news.title} could be an important milestone in AI industry development. Future developments will be closely watched.
+${news.title.en} could be an important milestone in AI industry development. Future developments will be closely watched.
 
 ### Related Links
 - [Read Original Article](${news.url})
@@ -210,11 +210,11 @@ tags: ['ข่าว AI', 'ข่าวด่วน', 'ข้อมูลล่�
 image: 'https://picsum.photos/800/400?random=${imageId}'
 ---
 
-# [ข่าวด่วน AI] ${news.title}
+# [ข่าวด่วน AI] ${news.title.th}
 
 ## ภาพรวมข่าว
 
-${news.summary}
+${news.summary.th}
 
 ## ข้อมูลรายละเอียด
 
@@ -226,8 +226,8 @@ ${news.summary}
 
 ## ข่าวที่เกี่ยวข้อง
 
-${relatedNews.map(item => `### ${item.title}
-${item.summary}
+${relatedNews.map(item => `### ${item.title.th}
+${item.summary.th}
 **แหล่งที่มา**: ${item.source}`).join('\n\n')}
 
 ## การวิเคราะห์ผลกระทบต่ออุตสาหกรรม
@@ -244,7 +244,7 @@ ${item.summary}
 
 ## สรุป
 
-${news.title} อาจเป็นจุดสำคัญในการพัฒนาอุตสาหกรรม AI การพัฒนาในอนาคตจะได้รับการติดตามอย่างใกล้ชิด
+${news.title.th} อาจเป็นจุดสำคัญในการพัฒนาอุตสาหกรรม AI การพัฒนาในอนาคตจะได้รับการติดตามอย่างใกล้ชิด
 
 ### ลิงก์ที่เกี่ยวข้อง
 - [อ่านบทความต้นฉบับ](${news.url})

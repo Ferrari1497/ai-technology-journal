@@ -4,19 +4,19 @@
   
   <url>
     <loc>https://staging.ai-tech-journal.com</loc>
-    <lastmod>2025-12-19T06:38:38.832Z</lastmod>
+    <lastmod>2025-12-19T08:22:17.732Z</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://staging.ai-tech-journal.com/en</loc>
-    <lastmod>2025-12-19T06:38:38.832Z</lastmod>
+    <lastmod>2025-12-19T08:22:17.733Z</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://staging.ai-tech-journal.com/th</loc>
-    <lastmod>2025-12-19T06:38:38.832Z</lastmod>
+    <lastmod>2025-12-19T08:22:17.733Z</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -25,19 +25,19 @@
   
   <url>
     <loc>https://staging.ai-tech-journal.com/archive</loc>
-    <lastmod>2025-12-19T06:38:38.832Z</lastmod>
+    <lastmod>2025-12-19T08:22:17.733Z</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://staging.ai-tech-journal.com/en/archive</loc>
-    <lastmod>2025-12-19T06:38:38.832Z</lastmod>
+    <lastmod>2025-12-19T08:22:17.733Z</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://staging.ai-tech-journal.com/th/archive</loc>
-    <lastmod>2025-12-19T06:38:38.832Z</lastmod>
+    <lastmod>2025-12-19T08:22:17.733Z</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
@@ -46,19 +46,19 @@
   
   <url>
     <loc>https://staging.ai-tech-journal.com/tools</loc>
-    <lastmod>2025-12-19T06:38:38.832Z</lastmod>
+    <lastmod>2025-12-19T08:22:17.733Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://staging.ai-tech-journal.com/en/tools</loc>
-    <lastmod>2025-12-19T06:38:38.832Z</lastmod>
+    <lastmod>2025-12-19T08:22:17.733Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://staging.ai-tech-journal.com/th/tools</loc>
-    <lastmod>2025-12-19T06:38:38.832Z</lastmod>
+    <lastmod>2025-12-19T08:22:17.733Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -67,23 +67,149 @@
   
   <url>
     <loc>https://staging.ai-tech-journal.com/news</loc>
-    <lastmod>2025-12-19T06:38:38.832Z</lastmod>
+    <lastmod>2025-12-19T08:22:17.733Z</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://staging.ai-tech-journal.com/en/news</loc>
-    <lastmod>2025-12-19T06:38:38.832Z</lastmod>
+    <lastmod>2025-12-19T08:22:17.733Z</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://staging.ai-tech-journal.com/th/news</loc>
-    <lastmod>2025-12-19T06:38:38.832Z</lastmod>
+    <lastmod>2025-12-19T08:22:17.733Z</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   
   <!-- Post pages -->
   
+  <url>
+    <loc>https://staging.ai-tech-journal.com/posts/2025-12-19-1766129172666-fallback</loc>
+    <lastmod>2025-12-19T00:00:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://staging.ai-tech-journal.com/posts/2025-12-19-1766129207605-fallback</loc>
+    <lastmod>2025-12-19T00:00:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://staging.ai-tech-journal.com/posts/2025-12-19-1766129543705-fallback</loc>
+    <lastmod>2025-12-19T00:00:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://staging.ai-tech-journal.com/posts/2025-12-19-1766129667230-fallback</loc>
+    <lastmod>2025-12-19T00:00:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://staging.ai-tech-journal.com/posts/2025-12-19-1766130940366-ai技術比較記事</loc>
+    <lastmod>2025-12-19T00:00:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://staging.ai-tech-journal.com/posts/2025-12-19-ai-news-1766132369084</loc>
+    <lastmod>2025-12-19T00:00:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://staging.ai-tech-journal.com/posts/2025-12-19-ai-news-1766132417309</loc>
+    <lastmod>2025-12-19T00:00:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://staging.ai-tech-journal.com/en/posts/2025-12-19-1766129172666-fallback</loc>
+    <lastmod>2025-12-19T00:00:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://staging.ai-tech-journal.com/en/posts/2025-12-19-1766129207605-fallback</loc>
+    <lastmod>2025-12-19T00:00:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://staging.ai-tech-journal.com/en/posts/2025-12-19-1766129543988-fallback</loc>
+    <lastmod>2025-12-19T00:00:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://staging.ai-tech-journal.com/en/posts/2025-12-19-1766129667904-fallback</loc>
+    <lastmod>2025-12-19T00:00:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://staging.ai-tech-journal.com/en/posts/2025-12-19-1766130948732-a-comprehensive-comparison-of-code-generation-ai-t</loc>
+    <lastmod>2025-12-19T00:00:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://staging.ai-tech-journal.com/en/posts/2025-12-19-ai-news-1766132369084</loc>
+    <lastmod>2025-12-19T00:00:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://staging.ai-tech-journal.com/en/posts/2025-12-19-ai-news-1766132417309</loc>
+    <lastmod>2025-12-19T00:00:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://staging.ai-tech-journal.com/th/posts/2025-12-19-1766129172666-fallback</loc>
+    <lastmod>2025-12-19T00:00:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://staging.ai-tech-journal.com/th/posts/2025-12-19-1766129207605-fallback</loc>
+    <lastmod>2025-12-19T00:00:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://staging.ai-tech-journal.com/th/posts/2025-12-19-1766129544879-fallback</loc>
+    <lastmod>2025-12-19T00:00:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://staging.ai-tech-journal.com/th/posts/2025-12-19-1766129668167-fallback</loc>
+    <lastmod>2025-12-19T00:00:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://staging.ai-tech-journal.com/th/posts/2025-12-19-1766130961966----------------------ai</loc>
+    <lastmod>2025-12-19T00:00:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://staging.ai-tech-journal.com/th/posts/2025-12-19-ai-news-1766132369084</loc>
+    <lastmod>2025-12-19T00:00:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://staging.ai-tech-journal.com/th/posts/2025-12-19-ai-news-1766132417309</loc>
+    <lastmod>2025-12-19T00:00:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
 </urlset>
