@@ -11,56 +11,44 @@ const openai = new OpenAI({
 
 // AIニュースのプロンプトテンプレート
 const newsPrompts = {
-  ja: `最新のAI業界ニュースを1つ作成してください。以下の形式で出力してください：
+  ja: `最新のAI業界ニュースを1つ作成してください。必ず以下のJSON形式のみで回答してください。他の文字は一切含めないでください：
 
 {
   "title": "【AIニュース速報】具体的なニュースタイトル",
-  "summary": "ニュースの概要（100文字程度）",
+  "summary": "ニュースの概要（100文字以内）",
   "source": "情報源（例：TechCrunch、OpenAI Blog等）",
   "url": "https://example.com/news-url",
-  "category": "product-release|product-update|performance|regulation|funding|partnership",
-  "content": "詳細な記事内容（1500文字程度）。以下の構成で：
-- ニュースの詳細説明
-- 技術的な背景
-- 業界への影響分析
-- 今後の展望"
+  "category": "product-release",
+  "content": "詳細な記事内容。ニュースの詳細説明、技術的な背景、業界への影響分析、今後の展望を含む。"
 }
 
-現実的で信憑性のあるAI業界のニュースを作成してください。`,
+注意：JSONのみを返してください。説明文や追加のテキストは不要です。`,
 
-  en: `Create a latest AI industry news article. Output in the following format:
+  en: `Create a latest AI industry news article. Respond ONLY with the following JSON format. Do not include any other text:
 
 {
   "title": "[AI News Flash] Specific news title",
-  "summary": "News summary (about 100 characters)",
+  "summary": "News summary (within 100 characters)",
   "source": "Information source (e.g., TechCrunch, OpenAI Blog, etc.)",
   "url": "https://example.com/news-url",
-  "category": "product-release|product-update|performance|regulation|funding|partnership",
-  "content": "Detailed article content (about 1500 characters). Structure:
-- Detailed news description
-- Technical background
-- Industry impact analysis
-- Future outlook"
+  "category": "product-release",
+  "content": "Detailed article content including news description, technical background, industry impact analysis, and future outlook."
 }
 
-Create realistic and credible AI industry news.`,
+Note: Return only JSON. No explanations or additional text needed.`,
 
-  th: `สร้างข่าวอุตสาหกรรม AI ล่าสุด 1 ข่าว ให้ออกมาในรูปแบบต่อไปนี้:
+  th: `สร้างข่าวอุตสาหกรรม AI ล่าสุด 1 ข่าว ตอบกลับเฉพาะ JSON ตามรูปแบบด้านล่างเท่านั้น อย่ารวมข้อความอื่นๆ:
 
 {
   "title": "[ข่าวด่วน AI] หัวข้อข่าวที่เฉพาะเจาะจง",
-  "summary": "สรุปข่าว (ประมาณ 100 ตัวอักษร)",
+  "summary": "สรุปข่าว (ไม่เกิน 100 ตัวอักษร)",
   "source": "แหล่งข้อมูล (เช่น TechCrunch, OpenAI Blog เป็นต้น)",
   "url": "https://example.com/news-url",
-  "category": "product-release|product-update|performance|regulation|funding|partnership",
-  "content": "เนื้อหาบทความโดยละเอียด (ประมาณ 1500 ตัวอักษร) โครงสร้าง:
-- คำอธิบายข่าวโดยละเอียด
-- ภูมิหลังทางเทคนิค
-- การวิเคราะห์ผลกระทบต่ออุตสาหกรรม
-- แนวโน้มในอนาคต"
+  "category": "product-release",
+  "content": "เนื้อหาบทความโดยละเอียด รวมคำอธิบายข่าว ภูมิหลังทางเทคนิค การวิเคราะห์ผลกระทบ และแนวโน้มในอนาคต"
 }
 
-สร้างข่าวอุตสาหกรรม AI ที่สมจริงและน่าเชื่อถือ`
+หมายเหตุ: ตอบกลับเฉพาะ JSON เท่านั้น ไม่ต้องการคำอธิบายหรือข้อความเพิ่มเติม`
 }
 
 const newsTemplates = {
@@ -248,7 +236,7 @@ async function generateNewsWithOpenAI(language) {
       messages: [
         {
           role: "system",
-          content: "あなたは専門的なAI業界ジャーナリストです。最新のAI技術動向に詳しく、正確で魅力的なニュース記事を作成します。"
+          content: "あなたは専門的なAI業界ジャーナリストです。最新のAI技術動向に詳しく、正確で魅力的なニュース記事を作成します。必ず有効なJSONフォーマットで回答してください。"
         },
         {
           role: "user",
@@ -256,10 +244,22 @@ async function generateNewsWithOpenAI(language) {
         }
       ],
       temperature: 0.7,
-      max_tokens: 2000
+      max_tokens: 1500
     })
 
-    const response = completion.choices[0].message.content
+    let response = completion.choices[0].message.content.trim()
+    
+    // JSONの前後の不要な文字を削除
+    const jsonStart = response.indexOf('{')
+    const jsonEnd = response.lastIndexOf('}') + 1
+    
+    if (jsonStart !== -1 && jsonEnd > jsonStart) {
+      response = response.substring(jsonStart, jsonEnd)
+    }
+    
+    // 改行文字をエスケープ
+    response = response.replace(/\n/g, '\\n').replace(/\r/g, '\\r')
+    
     const newsData = JSON.parse(response)
     
     console.log(`✅ ${language.toUpperCase()}ニュース生成完了: ${newsData.title}`)
@@ -267,6 +267,7 @@ async function generateNewsWithOpenAI(language) {
     
   } catch (error) {
     console.error(`❌ ${language.toUpperCase()}ニュース生成エラー:`, error.message)
+    console.error(`レスポンス内容:`, completion?.choices?.[0]?.message?.content || 'なし')
     
     // フォールバック: 静的データを使用
     const fallbackNews = {
@@ -284,6 +285,7 @@ async function generateNewsWithOpenAI(language) {
                'ความก้าวหน้าของเทคโนโลยี AI กำลังนำการเปลี่ยนแปลงที่เป็นนวัตกรรมมาสู่หลายสาขา เทคโนโลยีต่างๆ เช่น การเรียนรู้ของเครื่อง การประมวลผลภาษาธรรมชาติ และการมองเห็นของคอมพิวเตอร์ กำลังพัฒนาอย่างรวดเร็วและส่งผลกระทบอย่างมากต่อธุรกิจและชีวิตประจำวัน'
     }
     
+    console.log(`⚠️ ${language.toUpperCase()}フォールバック記事を使用`)
     return fallbackNews
   }
 }
