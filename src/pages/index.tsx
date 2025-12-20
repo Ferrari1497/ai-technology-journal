@@ -69,32 +69,6 @@ export default function Home({ allPosts, featuredTools }: HomeProps) {
             </div>
           </section>
 
-          <section className="ai-news-section">
-            <div className="section-header">
-              <h3>{getTranslation(currentLang, 'aiNews')}</h3>
-              <Link href="/news" className="view-all-link">
-                {getTranslation(currentLang, 'viewAllNews')}
-              </Link>
-            </div>
-            <div className="news-preview">
-              {allPosts[currentLang].latest20.filter(post => {
-                const aiNewsCategories = {
-                  ja: 'AIニュース',
-                  en: 'AI News', 
-                  th: 'ข่าว AI'
-                }
-                return post.category === aiNewsCategories[currentLang]
-              }).slice(0, 3).map((post) => (
-                <Link key={post.id} href={`/posts/${post.id}`} className="news-preview-item">
-                  <div className="news-badge">{getTranslation(currentLang, 'breaking')}</div>
-                  <h4>{post.title}</h4>
-                  <p>{post.excerpt}</p>
-                  <span className="news-date">{post.date}</span>
-                </Link>
-              ))}
-            </div>
-          </section>
-
           <section className="latest-articles">
             <div className="section-header">
               <h3>{getTranslation(currentLang, 'latestArticles')}</h3>

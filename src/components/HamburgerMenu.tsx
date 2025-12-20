@@ -44,9 +44,6 @@ export default function HamburgerMenu({ currentLang, onLanguageChange }: Hamburg
               <Link href="/tools" onClick={closeMenu}>
                 {getTranslation(currentLang, 'recommendedTools')}
               </Link>
-              <Link href="/news" onClick={closeMenu}>
-                {getTranslation(currentLang, 'aiNews')}
-              </Link>
             </nav>
 
 
