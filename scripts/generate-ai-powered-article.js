@@ -63,8 +63,8 @@ async function callOpenAI(prompt, language = 'ja') {
             content: prompt
           }
         ],
-        max_tokens: 2000,
-        temperature: 0.7,
+        max_tokens: 4000,
+        temperature: 0.8,
       }),
     })
 
@@ -83,14 +83,17 @@ async function callOpenAI(prompt, language = 'ja') {
   }
 }
 
-// 多言語プロンプトテンプレート
+// 多言語プロンプトテンプレート（より多様なトピックと長い記事）
 const promptTemplates = {
   ja: [
-    "2025年最新のAIツール比較記事を2000文字程度で書いてください。ChatGPT、Claude、Geminiの機能、料金、使いやすさを詳しく比較し、実際の使用例も含めてください。",
-    "AIライティングツールの徹底比較記事を2000文字程度で書いてください。各ツールの特徴、料金体系、導入事例、メリット・デメリットを詳しく解説してください。",
-    "コード生成AI（GitHub Copilot、Cursor、Codeium）の比較記事を2000文字程度で書いてください。開発効率、精度、料金、対応言語などを詳しく比較してください。",
-    "AI画像生成ツール（Midjourney、DALL-E、Stable Diffusion）の比較記事を2000文字程度で書いてください。画質、使いやすさ、料金、商用利用について詳しく解説してください。",
-    "ビジネス向けAIチャットボット（ChatGPT Enterprise、Claude Pro、Bard）の比較記事を2000文字程度で書いてください。企業導入事例、セキュリティ、コストパフォーマンスを中心に解説してください。"
+    "2025年最新のAIツール比較記事を3000文字以上で書いてください。ChatGPT、Claude、Geminiの機能、料金、使いやすさを詳しく比較し、実際の使用例、導入事例、メリット・デメリット、将来展望も含めてください。",
+    "AIライティングツールの徹底比較記事を3000文字以上で書いてください。Jasper、Copy.ai、Writesonic、Rytrなどの特徴、料金体系、導入事例、ROI分析、メリット・デメリットを詳しく解説してください。",
+    "コード生成AIツールの完全ガイドを3000文字以上で書いてください。GitHub Copilot、Cursor、Codeium、Tabnine、Amazon CodeWhispererの開発効率、精度、料金、対応言語、セキュリティ機能を詳しく比較してください。",
+    "AI画像生成ツールの総合レビューを3000文字以上で書いてください。Midjourney、DALL-E 3、Stable Diffusion、Adobe Firefly、Leonardo AIの画質、使いやすさ、料金、商用利用、ライセンスについて詳しく解説してください。",
+    "ビジネス向けAIチャットボットの企業導入ガイドを3000文字以上で書いてください。ChatGPT Enterprise、Claude Pro、Microsoft Copilot、Google Bardの企業導入事例、セキュリティ、コストパフォーマンス、コンプライアンスを中心に解説してください。",
+    "AI音声認識・音声合成ツールの最新動向を3000文字以上で書いてください。OpenAI Whisper、ElevenLabs、Murf、Speechify、Azure Speech Servicesの機能比較、精度、料金、実用事例を詳しく解説してください。",
+    "AIデータ分析ツールのビジネス活用ガイドを3000文字以上で書いてください。Tableau、Power BI、DataRobot、H2O.ai、Google Analytics Intelligenceの機能、導入コスト、ROI、成功事例を詳しく解説してください。",
+    "AI翻訳ツールの精度比較とビジネス活用を3000文字以上で書いてください。DeepL、Google Translate、Microsoft Translator、Amazon Translate、Papagoの精度、対応言語、料金、API連携、企業導入事例を詳しく解説してください。"
   ],
   en: [
     "Write a comprehensive 2000-word comparison article about the latest AI tools in 2025. Compare ChatGPT, Claude, and Gemini in terms of features, pricing, and usability, including real-world use cases.",
@@ -228,10 +231,11 @@ async function generateAIPoweredArticle() {
       // Markdown記事を作成
       const markdownContent = createMarkdownArticle(aiContent, title, category, lang)
       
-      // ファイル名を生成
+      // ファイル名を生成（ユニークなタイムスタンプ付き）
       const timestamp = Date.now()
-      const safeTitle = title.toLowerCase().replace(/[^a-z0-9\u3040-\u309F\u30A0-\u30FF\u4E00-\u9FAF]/g, '-').substring(0, 50)
-      const filename = `${new Date().toISOString().split('T')[0]}-${timestamp}-${safeTitle}.md`
+      const randomSuffix = Math.random().toString(36).substring(2, 8)
+      const safeTitle = title.toLowerCase().replace(/[^a-z0-9\u3040-\u309F\u30A0-\u30FF\u4E00-\u9FAF]/g, '-').substring(0, 30)
+      const filename = `${new Date().toISOString().split('T')[0]}-${timestamp}-${randomSuffix}-${safeTitle}.md`
       
       console.log(`📄 Generated filename: ${filename}`)
       console.log(`📊 Content length: ${markdownContent.length} characters`)
