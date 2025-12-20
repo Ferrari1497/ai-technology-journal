@@ -2,31 +2,109 @@ const fs = require('fs')
 const path = require('path')
 const TitleManager = require('./title-manager')
 
-// 多言語記事テンプレート
+// 多言語記事テンプレート（カテゴリー別）
 const multiLangTemplates = {
   ja: {
-    category: '生成AIツール比較',
-    topics: [
-      'ChatGPT vs Claude vs Gemini：2025年最新機能比較',
-      'AIライティングツール徹底比較：料金・精度・使いやすさ',
-      'コード生成AI比較：GitHub Copilot vs Cursor vs Codeium'
-    ]
+    categories: {
+      'AI_TOOLS': {
+        name: '生成AIツール比較',
+        topics: [
+          'ChatGPT vs Claude vs Gemini：2025年最新機能比較',
+          'AIライティングツール徹底比較：料金・精度・使いやすさ',
+          'コード生成AI比較：GitHub Copilot vs Cursor vs Codeium',
+          '画像生成AI完全ガイド：DALL-E vs Midjourney vs Stable Diffusion',
+          'AI音声合成ツール比較：品質・価格・使いやすさを徹底検証'
+        ]
+      },
+      'SAAS': {
+        name: 'SaaS紹介',
+        topics: [
+          'ビジネス向けAIチャットボット比較：導入効果と選び方',
+          'AI翻訳サービス徹底比較：DeepL vs Google翻訳 vs ChatGPT',
+          'プレゼンテーション作成AI比較：Gamma vs Beautiful.AI vs Tome',
+          'AI動画編集ツール比較：効率化と品質向上の決定版',
+          'データ分析AI比較：TableauとPowerBIのAI機能を検証'
+        ]
+      },
+      'PRODUCTIVITY': {
+        name: '業務効率化',
+        topics: [
+          'AI活用による営業プロセス革新：成功事例と導入ガイド',
+          'カスタマーサポートAI導入完全ガイド：効果測定と最適化',
+          'AI文書作成ツールで業務効率3倍アップ：実践的活用法',
+          'マーケティング自動化AI：ROI向上の具体的手法',
+          'AI人事システム導入ガイド：採用から評価まで完全自動化'
+        ]
+      }
+    }
   },
   en: {
-    category: 'AI Tools Comparison',
-    topics: [
-      'ChatGPT vs Claude vs Gemini: 2025 Latest Feature Comparison',
-      'AI Writing Tools Comprehensive Comparison: Pricing, Accuracy, Usability',
-      'Code Generation AI Comparison: GitHub Copilot vs Cursor vs Codeium'
-    ]
+    categories: {
+      'AI_TOOLS': {
+        name: 'AI Tools Comparison',
+        topics: [
+          'ChatGPT vs Claude vs Gemini: 2025 Latest Feature Comparison',
+          'AI Writing Tools Comprehensive Comparison: Pricing, Accuracy, Usability',
+          'Code Generation AI Comparison: GitHub Copilot vs Cursor vs Codeium',
+          'Image Generation AI Complete Guide: DALL-E vs Midjourney vs Stable Diffusion',
+          'AI Voice Synthesis Tools Comparison: Quality, Pricing, and Usability Review'
+        ]
+      },
+      'SAAS': {
+        name: 'SaaS Introduction',
+        topics: [
+          'Business AI Chatbot Comparison: Implementation Effects and Selection Guide',
+          'AI Translation Services Thorough Comparison: DeepL vs Google Translate vs ChatGPT',
+          'Presentation Creation AI Comparison: Gamma vs Beautiful.AI vs Tome',
+          'AI Video Editing Tools Comparison: The Definitive Guide for Efficiency and Quality',
+          'Data Analysis AI Comparison: Examining AI Features of Tableau and PowerBI'
+        ]
+      },
+      'PRODUCTIVITY': {
+        name: 'Business Efficiency',
+        topics: [
+          'Sales Process Revolution with AI: Success Stories and Implementation Guide',
+          'Customer Support AI Implementation Complete Guide: Effect Measurement and Optimization',
+          'Triple Your Productivity with AI Document Creation Tools: Practical Applications',
+          'Marketing Automation AI: Specific Methods for ROI Improvement',
+          'AI HR System Implementation Guide: Complete Automation from Recruitment to Evaluation'
+        ]
+      }
+    }
   },
   th: {
-    category: 'เปรียบเทียบเครื่องมือ AI',
-    topics: [
-      'ChatGPT vs Claude vs Gemini: เปรียบเทียบฟีเจอร์ล่าสุด 2025',
-      'เปรียบเทียบเครื่องมือเขียน AI: ราคา ความแม่นยำ ความใช้งานง่าย',
-      'เปรียบเทียบ AI สร้างโค้ด: GitHub Copilot vs Cursor vs Codeium'
-    ]
+    categories: {
+      'AI_TOOLS': {
+        name: 'เปรียบเทียบเครื่องมือ AI',
+        topics: [
+          'ChatGPT vs Claude vs Gemini: เปรียบเทียบฟีเจอร์ล่าสุด 2025',
+          'เปรียบเทียบเครื่องมือเขียน AI: ราคา ความแม่นยำ ความใช้งานง่าย',
+          'เปรียบเทียบ AI สร้างโค้ด: GitHub Copilot vs Cursor vs Codeium',
+          'คู่มือสมบูรณ์ AI สร้างภาพ: DALL-E vs Midjourney vs Stable Diffusion',
+          'เปรียบเทียบเครื่องมือสังเคราะห์เสียง AI: คุณภาพ ราคา และความใช้งานง่าย'
+        ]
+      },
+      'SAAS': {
+        name: 'แนะนำ SaaS',
+        topics: [
+          'เปรียบเทียบแชทบอท AI สำหรับธุรกิจ: ผลการนำไปใช้และคู่มือการเลือก',
+          'เปรียบเทียบบริการแปลภาษา AI: DeepL vs Google Translate vs ChatGPT',
+          'เปรียบเทียบ AI สร้างงานนำเสนอ: Gamma vs Beautiful.AI vs Tome',
+          'เปรียบเทียบเครื่องมือตัดต่อวิดีโอ AI: คู่มือสุดยอดเพื่อประสิทธิภาพและคุณภาพ',
+          'เปรียบเทียบ AI วิเคราะห์ข้อมูล: ตรวจสอบฟีเจอร์ AI ของ Tableau และ PowerBI'
+        ]
+      },
+      'PRODUCTIVITY': {
+        name: 'ประสิทธิภาพการทำงาน',
+        topics: [
+          'ปฏิวัติกรณะการขายด้วย AI: เรื่องราวความสำเร็จและคู่มือการนำไปใช้',
+          'คู่มือสมบูรณ์การนำไปใช้ AI สำหรับบริการลูกค้า: การวัดผลและการปรับให้เหมาะ',
+          'เพิ่มผลผลิต 3 เท่าด้วยเครื่องมือสร้างเอกสาร AI: วิธีการใช้งานจริง',
+          'AI อัตโนมัติการตลาด: วิธีการเฉพาะเจาะเพื่อเพิ่ม ROI',
+          'คู่มือการนำไปใช้ระบบ HR AI: อัตโนมัติอย่างสมบูรณ์ตั้งแต่การสรรหาบุคลากรไปจนถึงการประเมิน'
+        ]
+      }
+    }
   }
 }
 
@@ -347,18 +425,37 @@ function generateMultiLangArticle() {
   
   const titleManager = new TitleManager()
   
+  // カテゴリーローテーションのためのカテゴリー選択
+  const categories = ['AI_TOOLS', 'SAAS', 'PRODUCTIVITY']
+  const today = new Date()
+  const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / (1000 * 60 * 60 * 24))
+  const selectedCategoryIndex = dayOfYear % categories.length
+  const selectedCategory = categories[selectedCategoryIndex]
+  
+  console.log(`🔄 Category rotation: Day ${dayOfYear}, Selected category: ${selectedCategory}`)
+  
   languages.forEach(lang => {
     console.log(`\n🌐 Processing language: ${lang}`)
     
     const template = multiLangTemplates[lang]
+    const categoryData = template.categories[selectedCategory]
+    
+    if (!categoryData) {
+      console.error(`❌ Category ${selectedCategory} not found for language ${lang}`)
+      return
+    }
+    
+    console.log(`📂 Category: ${categoryData.name}`)
+    console.log(`📄 Available topics: ${categoryData.topics.length}`)
+    
     let randomIndex, randomTopic, uniqueTitle
     let attempts = 0
     const maxAttempts = 50
     
     // Try to find a unique title for this language
     do {
-      randomIndex = Math.floor(Math.random() * template.topics.length)
-      randomTopic = template.topics[randomIndex]
+      randomIndex = Math.floor(Math.random() * categoryData.topics.length)
+      randomTopic = categoryData.topics[randomIndex]
       uniqueTitle = titleManager.generateUniqueTitle(`${lang}:${randomTopic}`)
       attempts++
     } while (uniqueTitle === `${lang}:${randomTopic}` && attempts < maxAttempts)
@@ -373,9 +470,9 @@ function generateMultiLangArticle() {
     const displayTitle = uniqueTitle.replace(`${lang}:`, '')
     
     console.log(`📝 Selected topic (index ${randomIndex}): ${displayTitle}`)
-    console.log(`📂 Category: ${template.category}`)
+    console.log(`📂 Category: ${categoryData.name}`)
     
-    const content = contentTemplates[lang](displayTitle, template.category)
+    const content = contentTemplates[lang](displayTitle, categoryData.name)
     const timestamp = Date.now()
     const filename = `${new Date().toISOString().split('T')[0]}-${timestamp}-${displayTitle.toLowerCase().replace(/[^a-z0-9]/g, '-')}.md`
     
@@ -408,14 +505,16 @@ function generateMultiLangArticle() {
     
     console.log(`✅ ${lang.toUpperCase()}記事を生成しました: ${filename}`)
     console.log(`📝 Title: ${displayTitle}`)
-    generatedFiles.push({ lang, filename, filepath, title: displayTitle })
+    generatedFiles.push({ lang, filename, filepath, title: displayTitle, category: categoryData.name })
   })
   
   console.log('\n📊 Generation Summary:')
   console.log(`📄 Total files generated: ${generatedFiles.length}`)
+  console.log(`🔄 Selected category: ${selectedCategory}`)
   generatedFiles.forEach(file => {
     console.log(`   - ${file.lang}: ${file.filename}`)
     console.log(`     Path: ${file.filepath}`)
+    console.log(`     Category: ${file.category}`)
     console.log(`     Exists: ${fs.existsSync(file.filepath)}`)
   })
   

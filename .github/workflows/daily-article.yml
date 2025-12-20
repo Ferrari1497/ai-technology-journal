@@ -54,12 +54,12 @@ jobs:
         
     - name: Generate daily AI-powered articles with title management
       run: |
-        echo "🚀 Starting AI-powered article generation with title management..."
+        echo "🤖 Starting fully AI-powered article generation..."
         echo "Script path: scripts/generate-ai-powered-article.js"
         echo "Script exists: $([ -f scripts/generate-ai-powered-article.js ] && echo "Yes" || echo "No")"
         echo ""
         node scripts/generate-ai-powered-article.js
-        echo "📝 AI-powered article generation script completed with exit code: $?"
+        echo "📝 AI-powered article generation completed with exit code: $?"
       env:
         OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         
@@ -123,7 +123,7 @@ jobs:
           find posts/ -type f -name "*.md" -exec ls -la {} \;
         else
           echo "✅ Changes detected, committing..."
-          git commit -m "Add daily AI-powered articles with title management $(date +'%Y-%m-%d')"
+          git commit -m "Add daily fully AI-generated articles (title + content) $(date +'%Y-%m-%d')"
           echo "📤 Pushing to repository..."
           git push origin main
           echo "✅ Successfully pushed changes"

@@ -1,0 +1,96 @@
+name: Manual AI Article Generation (Staging)
+
+on:
+  workflow_dispatch:  # 手動実行専用
+    inputs:
+      article_count:
+        description: 'Number of articles to generate'
+        required: false
+        default: '1'
+        type: choice
+        options:
+        - '1'
+        - '3'
+        - '5'
+
+permissions:
+  contents: write
+
+jobs:
+  generate-staging-articles:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        
+    - name: Install dependencies
+      run: npm install
+      
+    - name: Generate AI-powered articles for staging
+      run: |
+        echo "🤖 Starting AI-powered article generation for staging..."
+        echo "📊 Generating ${{ github.event.inputs.article_count }} set(s) of articles"
+        
+        for i in $(seq 1 ${{ github.event.inputs.article_count }}); do
+          echo "🔄 Generating article set $i..."
+          node scripts/generate-ai-powered-article.js
+          echo "✅ Article set $i completed"
+          
+          # API制限を避けるため待機
+          if [ $i -lt ${{ github.event.inputs.article_count }} ]; then
+            echo "⏳ Waiting 30 seconds before next generation..."
+            sleep 30
+          fi
+        done
+        
+        echo "🎉 All article generation completed!"
+      env:
+        OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        
+    - name: Check generated files
+      run: |
+        echo "📊 Generated files summary:"
+        echo "📁 Japanese articles:"
+        ls -la posts/ja/ | tail -5
+        echo "📁 English articles:"
+        ls -la posts/en/ | tail -5
+        echo "📁 Thai articles:"
+        ls -la posts/th/ | tail -5
+        
+    - name: Commit and push changes
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add posts/
+        
+        if git diff --staged --quiet; then
+          echo "❌ No changes to commit"
+        else
+          git commit -m "Add AI-generated articles for staging test $(date +'%Y-%m-%d %H:%M')"
+          git push origin main
+          echo "✅ Successfully pushed changes"
+        fi
+        
+    - name: Build and deploy to staging
+      run: |
+        echo "🏗️ Building Next.js for staging..."
+        npx next build
+        
+        echo "🚀 Deploying to S3 staging..."
+        aws s3 sync out/ s3://${{ secrets.S3_BUCKET_STAGING }} --delete
+        
+        echo "✅ Deployment completed!"
+        echo "🌐 Staging URL: http://ai-tech-journal-staging-1766124861.s3-website-ap-northeast-1.amazonaws.com"
+        echo "🔐 Login: admin / staging123"
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_DEFAULT_REGION: ap-northeast-1
+        NEXT_PUBLIC_SITE_URL: http://ai-tech-journal-staging-1766124861.s3-website-ap-northeast-1.amazonaws.com
+        NEXT_PUBLIC_ENVIRONMENT: staging

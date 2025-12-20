@@ -15,6 +15,7 @@
 
 ### 毎日の記事自動生成
 - GitHub Actionsで毎日午前9時に実行
+- **完全AI自動生成**: タイトルと内容をAIが自動で考案・生成
 - 2000文字程度の高品質記事を自動生成
 - AIツール比較、SaaS紹介、業務効率化の3カテゴリーをローテーション
 - 自動的にGitリポジトリにコミット・プッシュ
@@ -73,6 +74,9 @@ npm run dev
 ### 記事生成（手動実行）
 
 ```bash
+# 完全AI自動生成記事（タイトル+内容をAIが生成）
+npm run generate-ai-powered
+
 # 基本的な記事生成（多言語対応）
 npm run generate-multilang-article
 

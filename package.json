@@ -11,6 +11,7 @@
     "generate-enhanced-article": "node scripts/openai-article-generator.js",
     "generate-multilang-article": "node scripts/generate-multilang-article.js",
     "generate-ai-article": "node scripts/generate-ai-powered-article.js",
+    "generate-ai-powered": "node scripts/generate-ai-powered-article.js",
     "generate-tool-article": "node scripts/generate-tool-article.js",
     "generate-ai-news": "node scripts/generate-ai-news.js",
     "generate-ai-news-openai": "node scripts/generate-ai-news-openai.js",
