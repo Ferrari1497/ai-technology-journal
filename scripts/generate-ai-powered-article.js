@@ -2,6 +2,27 @@ const fs = require('fs')
 const path = require('path')
 const TitleManager = require('./title-manager')
 
+// UUID風のランダムID生成関数
+function generateUniqueId() {
+  const chars = 'abcdefghijklmnopqrstuvwxyz0123456789'
+  let result = ''
+  for (let i = 0; i < 16; i++) {
+    result += chars.charAt(Math.floor(Math.random() * chars.length))
+  }
+  return result
+}
+
+// 完全一意ファイル名生成関数
+function generateUniqueFilename(lang) {
+  const now = new Date()
+  const dateStr = now.toISOString().split('T')[0]
+  const timeStr = now.getTime().toString()
+  const uniqueId = generateUniqueId()
+  const processId = process.pid || Math.floor(Math.random() * 10000)
+  
+  return `${dateStr}-${timeStr}-${lang}-${processId}-${uniqueId}.md`
+}
+
 // OpenAI API設定
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY
 
@@ -198,10 +219,8 @@ async function generateAIPoweredArticle() {
         `title: '${finalTitle}'`
       )
       
-      // ファイル名生成（完全に一意性を保証）
-      const timestamp = Date.now()
-      const randomId = Math.random().toString(36).substring(2, 12) + Math.random().toString(36).substring(2, 8)
-      const filename = `${new Date().toISOString().split('T')[0]}-${timestamp}-${lang}-${randomId}.md`
+      // ファイル名生成（完全一意性を保証）
+      const filename = generateUniqueFilename(lang)
       
       console.log(`📄 Generated filename: ${filename}`)
       console.log(`📊 Content length: ${finalContent.length} characters`)
@@ -212,15 +231,28 @@ async function generateAIPoweredArticle() {
         fs.mkdirSync(postsDir, { recursive: true })
       }
       
-      // ファイル保存
+      // ファイル保存前に重複チェック
       const filepath = path.join(postsDir, filename)
-      fs.writeFileSync(filepath, finalContent, 'utf8')
+      let finalFilepath = filepath
+      let counter = 1
       
-      console.log(`✅ ${lang.toUpperCase()} article generated: ${filename}`)
+      // 万が一同じファイル名が存在した場合のフォールバック
+      while (fs.existsSync(finalFilepath)) {
+        const nameWithoutExt = filename.replace('.md', '')
+        const newFilename = `${nameWithoutExt}-${counter}.md`
+        finalFilepath = path.join(postsDir, newFilename)
+        counter++
+        console.log(`⚠️ File exists, trying: ${newFilename}`)
+      }
+      
+      // ファイル保存
+      fs.writeFileSync(finalFilepath, finalContent, 'utf8')
+      
+      console.log(`✅ ${lang.toUpperCase()} article generated: ${path.basename(finalFilepath)}`)
       generatedFiles.push({ 
         lang, 
-        filename, 
-        filepath, 
+        filename: path.basename(finalFilepath), 
+        filepath: finalFilepath, 
         title: finalTitle, 
         category: categoryInfo.name 
       })
