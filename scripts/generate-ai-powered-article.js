@@ -57,7 +57,7 @@ async function callOpenAI(prompt, language = 'ja') {
         messages: [
           {
             role: 'system',
-            content: `You are a professional tech writer specializing in AI tools and technology. Write high-quality, informative articles in ${language === 'ja' ? 'Japanese' : language === 'en' ? 'English' : 'Thai'}.`
+            content: `You are a professional tech writer specializing in AI tools and technology. Write comprehensive, detailed, and informative articles in ${language === 'ja' ? 'Japanese' : language === 'en' ? 'English' : 'Thai'}. Focus on providing in-depth analysis, practical examples, and actionable insights. Make sure to write at least 3000 characters for comprehensive coverage. Always create unique titles and content, even when covering similar topics.`
           },
           {
             role: 'user',
@@ -65,7 +65,7 @@ async function callOpenAI(prompt, language = 'ja') {
           }
         ],
         max_tokens: 4000,
-        temperature: 0.8,
+        temperature: 0.9,
       }),
     })
 
@@ -240,8 +240,20 @@ async function generateAIPoweredArticle() {
       console.log(`📂 Category: ${category}`)
       console.log(`📝 Prompt: ${selectedPrompt.prompt.substring(0, 100)}...`)
       
+      // If prompt is reused, add variation instruction
+      let finalPrompt = selectedPrompt.prompt
+      if (selectedPrompt.isReused) {
+        const variations = {
+          ja: '※重要：これまでに書いた記事とは異なる視点やアプローチで、ユニークなタイトルと内容にしてください。',
+          en: '※Important: Please write with a different perspective or approach from previous articles, ensuring a unique title and content.',
+          th: '※สำคัญ: กรุณาเขียนด้วยมุมมองหรือแนวทางที่แตกต่างจากบทความก่อนหน้า เพื่อให้ได้หัวข้อและเนื้อหาที่ไม่ซ้ำกัน'
+        }
+        finalPrompt = `${selectedPrompt.prompt}\n\n${variations[lang]}`
+        console.log(`🔄 Added variation instruction for reused prompt`)
+      }
+      
       // OpenAI APIを呼び出し
-      const aiContent = await callOpenAI(selectedPrompt.prompt, lang)
+      const aiContent = await callOpenAI(finalPrompt, lang)
       
       // タイトルを抽出して重複チェック
       const extractedTitle = extractTitle(aiContent, lang)

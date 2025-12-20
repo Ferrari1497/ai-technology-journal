@@ -45,16 +45,15 @@ class PromptManager {
         console.log(`📝 Selected unused prompt index: ${i} for ${language}`)
         console.log(`📊 Used prompts for ${language}: ${this.usedPrompts[language].length}/${prompts.length}`)
         
-        return { index: i, prompt: prompts[i] }
+        return { index: i, prompt: prompts[i], isReused: false }
       }
     }
     
-    // All prompts used, reset and use first one
-    console.log(`🔄 All prompts used for ${language}, resetting...`)
-    this.usedPrompts[language] = [0]
-    this.saveUsedPrompts()
+    // All prompts used, select random one and mark as reused
+    const randomIndex = Math.floor(Math.random() * prompts.length)
+    console.log(`🔄 All prompts used for ${language}, selecting random prompt ${randomIndex} with variation`)
     
-    return { index: 0, prompt: prompts[0] }
+    return { index: randomIndex, prompt: prompts[randomIndex], isReused: true }
   }
 
   getUsedPromptsCount(language) {
