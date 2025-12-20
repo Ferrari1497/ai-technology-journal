@@ -1,6 +1,7 @@
 const fs = require('fs')
 const path = require('path')
 const TitleManager = require('./title-manager')
+const PromptManager = require('./prompt-manager')
 
 // .env.stagingファイルから環境変数を読み込み
 function loadEnvFile() {
@@ -93,46 +94,67 @@ const promptTemplates = {
     "ビジネス向けAIチャットボットの企業導入ガイドを3000文字以上で書いてください。ChatGPT Enterprise、Claude Pro、Microsoft Copilot、Google Bardの企業導入事例、セキュリティ、コストパフォーマンス、コンプライアンスを中心に解説してください。",
     "AI音声認識・音声合成ツールの最新動向を3000文字以上で書いてください。OpenAI Whisper、ElevenLabs、Murf、Speechify、Azure Speech Servicesの機能比較、精度、料金、実用事例を詳しく解説してください。",
     "AIデータ分析ツールのビジネス活用ガイドを3000文字以上で書いてください。Tableau、Power BI、DataRobot、H2O.ai、Google Analytics Intelligenceの機能、導入コスト、ROI、成功事例を詳しく解説してください。",
-    "AI翻訳ツールの精度比較とビジネス活用を3000文字以上で書いてください。DeepL、Google Translate、Microsoft Translator、Amazon Translate、Papagoの精度、対応言語、料金、API連携、企業導入事例を詳しく解説してください。"
+    "AI翻訳ツールの精度比較とビジネス活用を3000文字以上で書いてください。DeepL、Google Translate、Microsoft Translator、Amazon Translate、Papagoの精度、対応言語、料金、API連携、企業導入事例を詳しく解説してください。",
+    "AI自動化ツールの導入効果と選び方ガイドを3000文字以上で書いてください。Zapier、Microsoft Power Automate、UiPath、Automation Anywhere、Blue Prismの機能比較、導入コスト、ROI分析、業務効率化事例を詳しく解説してください。"
   ],
   en: [
-    "Write a comprehensive 2000-word comparison article about the latest AI tools in 2025. Compare ChatGPT, Claude, and Gemini in terms of features, pricing, and usability, including real-world use cases.",
-    "Write a detailed 2000-word comparison article about AI writing tools. Explain the features, pricing models, implementation cases, and pros/cons of each tool in detail.",
-    "Write a comprehensive 2000-word comparison article about code generation AI tools (GitHub Copilot, Cursor, Codeium). Compare development efficiency, accuracy, pricing, and supported languages in detail.",
-    "Write a detailed 2000-word comparison article about AI image generation tools (Midjourney, DALL-E, Stable Diffusion). Explain image quality, usability, pricing, and commercial usage in detail.",
-    "Write a comprehensive 2000-word comparison article about business AI chatbots (ChatGPT Enterprise, Claude Pro, Bard). Focus on enterprise implementation cases, security, and cost-effectiveness."
+    "Write a comprehensive 3000+ word comparison article about the latest AI tools in 2025. Compare ChatGPT, Claude, and Gemini in terms of features, pricing, usability, real-world use cases, implementation examples, pros/cons, and future prospects.",
+    "Write a detailed 3000+ word comparison article about AI writing tools. Compare Jasper, Copy.ai, Writesonic, Rytr in terms of features, pricing models, implementation cases, ROI analysis, and detailed pros/cons.",
+    "Write a comprehensive 3000+ word guide about code generation AI tools. Compare GitHub Copilot, Cursor, Codeium, Tabnine, Amazon CodeWhisperer in terms of development efficiency, accuracy, pricing, supported languages, and security features.",
+    "Write a detailed 3000+ word review about AI image generation tools. Compare Midjourney, DALL-E 3, Stable Diffusion, Adobe Firefly, Leonardo AI in terms of image quality, usability, pricing, commercial usage, and licensing.",
+    "Write a comprehensive 3000+ word enterprise guide about business AI chatbots. Compare ChatGPT Enterprise, Claude Pro, Microsoft Copilot, Google Bard focusing on enterprise implementation, security, cost-effectiveness, and compliance.",
+    "Write a detailed 3000+ word article about AI voice recognition and synthesis tools. Compare OpenAI Whisper, ElevenLabs, Murf, Speechify, Azure Speech Services in terms of features, accuracy, pricing, and practical applications.",
+    "Write a comprehensive 3000+ word business guide about AI data analysis tools. Compare Tableau, Power BI, DataRobot, H2O.ai, Google Analytics Intelligence in terms of features, implementation costs, ROI, and success stories.",
+    "Write a detailed 3000+ word comparison about AI translation tools for business. Compare DeepL, Google Translate, Microsoft Translator, Amazon Translate, Papago in terms of accuracy, supported languages, pricing, API integration, and enterprise use cases.",
+    "Write a comprehensive 3000+ word guide about AI automation tools and their implementation benefits. Compare Zapier, Microsoft Power Automate, UiPath, Automation Anywhere, Blue Prism in terms of features, implementation costs, ROI analysis, and business efficiency cases."
   ],
   th: [
-    "เขียนบทความเปรียบเทียบเครื่องมือ AI ล่าสุดในปี 2025 ประมาณ 2000 คำ เปรียบเทียบ ChatGPT, Claude และ Gemini ในด้านฟีเจอร์ ราคา และความใช้งานง่าย รวมถึงตัวอย่างการใช้งานจริง",
-    "เขียนบทความเปรียบเทียบเครื่องมือเขียน AI อย่างละเอียด ประมาณ 2000 คำ อธิบายคุณสมบัติ โมเดลราคา กรณีศึกษาการนำไปใช้ และข้อดี-ข้อเสียของแต่ละเครื่องมือ",
-    "เขียนบทความเปรียบเทียบเครื่องมือ AI สร้างโค้ด (GitHub Copilot, Cursor, Codeium) ประมาณ 2000 คำ เปรียบเทียบประสิทธิภาพการพัฒนา ความแม่นยำ ราคา และภาษาที่รองรับ",
-    "เขียนบทความเปรียบเทียบเครื่องมือสร้างภาพ AI (Midjourney, DALL-E, Stable Diffusion) ประมาณ 2000 คำ อธิบายคุณภาพภาพ ความใช้งานง่าย ราคา และการใช้งานเชิงพาณิชย์",
-    "เขียนบทความเปรียบเทียบแชทบอท AI สำหรับธุรกิจ (ChatGPT Enterprise, Claude Pro, Bard) ประมาณ 2000 คำ เน้นกรณีศึกษาการนำไปใช้ในองค์กร ความปลอดภัย และความคุ้มค่า"
+    "เขียนบทความเปรียบเทียบเครื่องมือ AI ล่าสุดในปี 2025 ประมาณ 3000+ คำ เปรียบเทียบ ChatGPT, Claude, Gemini ในด้านฟีเจอร์ ราคา ความใช้งานง่าย ตัวอย่างการใช้งานจริง ข้อดี-ข้อเสีย และแนวโน้มอนาคต",
+    "เขียนบทความเปรียบเทียบเครื่องมือเขียน AI ประมาณ 3000+ คำ เปรียบเทียบ Jasper, Copy.ai, Writesonic, Rytr ในด้านคุณสมบัติ โมเดลราคา กรณีศึกษาการนำไปใช้ การวิเคราะห์ ROI และข้อดี-ข้อเสียอย่างละเอียด",
+    "เขียนคู่มือครบถ้วนเกี่ยวกับเครื่องมือ AI สร้างโค้ด ประมาณ 3000+ คำ เปรียบเทียบ GitHub Copilot, Cursor, Codeium, Tabnine, Amazon CodeWhisperer ในด้านประสิทธิภาพการพัฒนา ความแม่นยำ ราคา ภาษาที่รองรับ และคุณสมบัติความปลอดภัย",
+    "เขียนรีวิวครบถ้วนเกี่ยวกับเครื่องมือสร้างภาพ AI ประมาณ 3000+ คำ เปรียบเทียบ Midjourney, DALL-E 3, Stable Diffusion, Adobe Firefly, Leonardo AI ในด้านคุณภาพภาพ ความใช้งานง่าย ราคา การใช้งานเชิงพาณิชย์ และลิขสิทธิ์",
+    "เขียนคู่มือองค์กรเกี่ยวกับแชทบอท AI สำหรับธุรกิจ ประมาณ 3000+ คำ เปรียบเทียบ ChatGPT Enterprise, Claude Pro, Microsoft Copilot, Google Bard เน้นการนำไปใช้ในองค์กร ความปลอดภัย ความคุ้มค่า และการปฏิบัติตามกฎระเบียบ",
+    "เขียนบทความแนวโน้มล่าสุดเกี่ยวกับเครื่องมือ AI รับรู้เสียงและสังเคราะห์เสียง ประมาณ 3000+ คำ เปรียบเทียบ OpenAI Whisper, ElevenLabs, Murf, Speechify, Azure Speech Services ในด้านคุณสมบัติ ความแม่นยำ ราคา และการนำไปใช้จริง",
+    "เขียนคู่มือธุรกิจเกี่ยวกับเครื่องมือวิเคราะห์ข้อมูล AI ประมาณ 3000+ คำ เปรียบเทียบ Tableau, Power BI, DataRobot, H2O.ai, Google Analytics Intelligence ในด้านคุณสมบัติ ต้นทุนการนำไปใช้ ROI และเรื่องราวความสำเร็จ",
+    "เขียนบทความเปรียบเทียบเครื่องมือแปลภาษา AI สำหรับธุรกิจ ประมาณ 3000+ คำ เปรียบเทียบ DeepL, Google Translate, Microsoft Translator, Amazon Translate, Papago ในด้านความแม่นยำ ภาษาที่รองรับ ราคา การรวม API และกรณีศึกษาการใช้งานในองค์กร",
+    "เขียนคู่มือครบถ้วนเกี่ยวกับเครื่องมือ AI อัตโนมัติและผลประโยชน์จากการนำไปใช้ ประมาณ 3000+ คำ เปรียบเทียบ Zapier, Microsoft Power Automate, UiPath, Automation Anywhere, Blue Prism ในด้านคุณสมบัติ ต้นทุนการนำไปใช้ การวิเคราะห์ ROI และกรณีศึกษาประสิทธิภาพทางธุรกิจ"
   ]
 }
 
-// カテゴリマッピング
+// カテゴリマッピング（9種類に拡張）
 const categoryMapping = {
   ja: {
     0: '生成AIツール比較',
     1: 'AIライティングツール',
     2: 'コード生成AI',
     3: 'AI画像生成',
-    4: 'ビジネスAI'
+    4: 'ビジネスAI',
+    5: 'AI音声技術',
+    6: 'AIデータ分析',
+    7: 'AI翻訳ツール',
+    8: 'AI自動化ツール'
   },
   en: {
     0: 'AI Tools Comparison',
     1: 'AI Writing Tools',
     2: 'Code Generation AI',
     3: 'AI Image Generation',
-    4: 'Business AI'
+    4: 'Business AI',
+    5: 'AI Voice Technology',
+    6: 'AI Data Analysis',
+    7: 'AI Translation Tools',
+    8: 'AI Automation Tools'
   },
   th: {
     0: 'เปรียบเทียบเครื่องมือ AI',
     1: 'เครื่องมือเขียน AI',
     2: 'AI สร้างโค้ด',
     3: 'AI สร้างภาพ',
-    4: 'AI สำหรับธุรกิจ'
+    4: 'AI สำหรับธุรกิจ',
+    5: 'เทคโนโลยีเสียง AI',
+    6: 'AI วิเคราะห์ข้อมูล',
+    7: 'เครื่องมือแปลภาษา AI',
+    8: 'เครื่องมือ AI อัตโนมัติ'
   }
 }
 
@@ -199,6 +221,7 @@ async function generateAIPoweredArticle() {
   const languages = ['ja', 'en', 'th']
   const generatedFiles = []
   const titleManager = new TitleManager()
+  const promptManager = new PromptManager()
   
   // Check if posts directory exists
   const postsBaseDir = path.join(__dirname, '..', 'posts')
@@ -208,18 +231,17 @@ async function generateAIPoweredArticle() {
     console.log(`\n🌐 Processing language: ${lang}`)
     
     try {
-      // ランダムなプロンプトを選択
+      // プロンプトを順次選択（ランダムではなく未使用のものを選択）
       const prompts = promptTemplates[lang]
-      const randomIndex = Math.floor(Math.random() * prompts.length)
-      const selectedPrompt = prompts[randomIndex]
-      const category = categoryMapping[lang][randomIndex]
+      const selectedPrompt = promptManager.getNextAvailablePrompt(lang, prompts)
+      const category = categoryMapping[lang][selectedPrompt.index]
       
-      console.log(`📝 Selected prompt index: ${randomIndex}`)
+      console.log(`📝 Selected prompt index: ${selectedPrompt.index}`)
       console.log(`📂 Category: ${category}`)
-      console.log(`📝 Prompt: ${selectedPrompt.substring(0, 100)}...`)
+      console.log(`📝 Prompt: ${selectedPrompt.prompt.substring(0, 100)}...`)
       
       // OpenAI APIを呼び出し
-      const aiContent = await callOpenAI(selectedPrompt, lang)
+      const aiContent = await callOpenAI(selectedPrompt.prompt, lang)
       
       // タイトルを抽出して重複チェック
       const extractedTitle = extractTitle(aiContent, lang)

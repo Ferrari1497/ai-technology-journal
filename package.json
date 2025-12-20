@@ -31,7 +31,8 @@
     "staging:all": "node scripts/generate-staging-articles.js all",
     "staging:auth": "node scripts/setup-basic-auth.js",
     "check-duplicate-titles": "node scripts/check-duplicate-titles.js",
-    "sync-existing-titles": "node scripts/sync-existing-titles.js"
+    "sync-existing-titles": "node scripts/sync-existing-titles.js",
+    "reset-used-prompts": "node scripts/reset-used-prompts.js"
   },
   "dependencies": {
     "dotenv": "^17.2.3",
