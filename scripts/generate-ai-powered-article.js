@@ -304,13 +304,14 @@ async function generateAIPoweredArticle() {
       console.log(`🔄 Generating fallback article for ${lang}...`)
       const fallbackContent = `# AI技術の最新動向\n\n申し訳ございませんが、現在AI記事生成サービスに一時的な問題が発生しています。\n\n## 今後の予定\n\n- サービス復旧後に高品質な記事をお届けします\n- 最新のAI技術情報をお待ちください\n\n*このメッセージは自動生成されています。*`
       
-      const baseFallbackTitle = 'AI技術の最新動向'
+      const baseFallbackTitle = `AI技術の最新動向-${timestamp}`
       const fallbackTitle = titleManager.generateUniqueTitle(`${lang}:${baseFallbackTitle}`).replace(`${lang}:`, '')
       const fallbackCategory = categoryMapping[lang][0]
       const markdownContent = createMarkdownArticle(fallbackContent, fallbackTitle, fallbackCategory, lang)
       
       const timestamp = Date.now()
-      const filename = `${new Date().toISOString().split('T')[0]}-${timestamp}-fallback.md`
+      const randomSuffix = Math.random().toString(36).substring(2, 8)
+      const filename = `${new Date().toISOString().split('T')[0]}-${timestamp}-${randomSuffix}-fallback.md`
       const postsDir = path.join(postsBaseDir, lang)
       
       if (!fs.existsSync(postsDir)) {
