@@ -77,9 +77,14 @@ jobs:
           echo "✅ Successfully pushed changes"
         fi
         
+    - name: Pull latest changes after commit
+      run: |
+        echo "🔄 Pulling latest changes to include generated articles in build..."
+        git pull origin staging
+        
     - name: Build and deploy to staging
       run: |
-        echo "🏗️ Building Next.js for staging..."
+        echo "🏗️ Building Next.js for staging with all articles..."
         npx next build
         
         echo "🚀 Deploying to S3 staging..."
