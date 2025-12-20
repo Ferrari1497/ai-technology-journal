@@ -125,7 +125,7 @@ jobs:
           echo "✅ Changes detected, committing..."
           git commit -m "Add daily fully AI-generated articles (title + content) $(date +'%Y-%m-%d')"
           echo "📤 Pushing to repository..."
-          git push origin main
+          git push origin staging
           echo "✅ Successfully pushed changes"
         fi
         

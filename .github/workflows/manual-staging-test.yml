@@ -73,7 +73,7 @@ jobs:
           echo "❌ No changes to commit"
         else
           git commit -m "Add AI-generated articles for staging test $(date +'%Y-%m-%d %H:%M')"
-          git push origin main
+          git push origin staging
           echo "✅ Successfully pushed changes"
         fi
         
