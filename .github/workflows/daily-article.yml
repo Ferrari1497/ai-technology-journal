@@ -139,11 +139,10 @@ jobs:
         
     - name: Deploy to S3
       run: |
-        aws s3 sync out/ s3://${{ secrets.S3_BUCKET_STAGING }} --delete
+        aws s3 sync out/ s3://${{ secrets.S3_BUCKET_STAGING }} --delete --no-progress
         echo "✅ Deployment completed successfully"
         echo "🌐 Staging URL: http://ai-tech-journal-staging-1766124861.s3-website-ap-northeast-1.amazonaws.com"
         echo "🔐 Login: admin / staging123"
-        echo "📝 Note: CloudFront cache invalidation skipped for staging environment"
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

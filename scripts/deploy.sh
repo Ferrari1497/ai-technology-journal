@@ -55,9 +55,13 @@ npm run export
 echo "☁️ Uploading to S3..."
 aws s3 sync out/ s3://$S3_BUCKET --delete
 
-# CloudFrontキャッシュ無効化
-echo "🔄 Invalidating CloudFront cache..."
-aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_ID --paths "/*"
+# CloudFrontキャッシュ無効化（ステージング環境ではスキップ）
+if [ "$ENVIRONMENT" = "production" ]; then
+    echo "🔄 Invalidating CloudFront cache..."
+    aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_ID --paths "/*"
+else
+    echo "📝 Skipping CloudFront cache invalidation for staging environment"
+fi
 
 # デプロイ後検証
 echo "🔍 Post-deploy verification..."
