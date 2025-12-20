@@ -41,7 +41,16 @@ export function getAllPosts(lang: Language = 'ja'): Post[] {
     } as Post
   })
 
-  return allPostsData.sort((a, b) => (a.date < b.date ? 1 : -1))
+  return allPostsData.sort((a, b) => {
+    // 日付で降順ソート（新しい記事が最初）
+    const dateA = new Date(a.date)
+    const dateB = new Date(b.date)
+    if (dateA.getTime() !== dateB.getTime()) {
+      return dateB.getTime() - dateA.getTime()
+    }
+    // 日付が同じ場合はファイル名で降順ソート
+    return b.id.localeCompare(a.id)
+  })
 }
 
 export function getRecentPosts(lang: Language = 'ja'): { thisMonth: Post[], lastMonth: Post[], older: Post[] } {

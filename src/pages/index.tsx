@@ -115,10 +115,10 @@ export const getStaticProps: GetStaticProps = async () => {
     const { thisMonth, lastMonth, older } = getRecentPosts(lang)
     const allPostsForLang = getAllPosts(lang)
     allPosts[lang] = {
-      thisMonth: thisMonth.slice(0, 6),
-      lastMonth: lastMonth.slice(0, 6),
+      thisMonth: thisMonth.slice(0, 12),
+      lastMonth: lastMonth.slice(0, 12),
       hasOlderPosts: older.length > 0,
-      latest20: allPostsForLang.slice(0, 10)
+      latest20: allPostsForLang.slice(0, 20)
     }
   })
   
