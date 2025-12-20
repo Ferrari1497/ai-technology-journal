@@ -127,6 +127,5 @@ export const getStaticProps: GetStaticProps = async () => {
       allPosts,
       featuredTools: recommendedTools.slice(0, 3),
     },
-    revalidate: 60, // 60秒ごとに再生成
   }
 }
