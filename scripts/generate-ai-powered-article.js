@@ -300,30 +300,24 @@ async function generateAIPoweredArticle() {
       console.error(`❌ Error generating ${lang} article: ${error.message}`)
       console.error(`❌ Error stack: ${error.stack}`)
       
-      // エラーの場合はフォールバック記事を生成
-      console.log(`🔄 Generating fallback article for ${lang}...`)
-      const fallbackContent = `# AI技術の最新動向\n\n申し訳ございませんが、現在AI記事生成サービスに一時的な問題が発生しています。\n\n## 今後の予定\n\n- サービス復旧後に高品質な記事をお届けします\n- 最新のAI技術情報をお待ちください\n\n*このメッセージは自動生成されています。*`
+      // フォールバック記事生成はエラーとして扱う
+      const errorMessage = `OpenAI API failed for ${lang}: ${error.message}`
+      console.error(`💥 CRITICAL ERROR: ${errorMessage}`)
       
-      const baseFallbackTitle = `AI技術の最新動向-${timestamp}`
-      const fallbackTitle = titleManager.generateUniqueTitle(`${lang}:${baseFallbackTitle}`).replace(`${lang}:`, '')
-      const fallbackCategory = categoryMapping[lang][0]
-      const markdownContent = createMarkdownArticle(fallbackContent, fallbackTitle, fallbackCategory, lang)
-      
-      const timestamp = Date.now()
-      const randomSuffix = Math.random().toString(36).substring(2, 8)
-      const filename = `${new Date().toISOString().split('T')[0]}-${timestamp}-${randomSuffix}-fallback.md`
-      const postsDir = path.join(postsBaseDir, lang)
-      
-      if (!fs.existsSync(postsDir)) {
-        fs.mkdirSync(postsDir, { recursive: true })
+      // エラーの詳細を出力
+      if (error.message.includes('OPENAI_API_KEY')) {
+        console.error('🔑 CAUSE: OpenAI API key is missing or invalid')
+        console.error('🔧 SOLUTION: Set valid OPENAI_API_KEY in GitHub Secrets')
+      } else if (error.message.includes('API error')) {
+        console.error('🌐 CAUSE: OpenAI API request failed')
+        console.error('🔧 SOLUTION: Check API key validity and rate limits')
+      } else {
+        console.error('❓ CAUSE: Unknown error occurred')
+        console.error('🔧 SOLUTION: Check logs and API configuration')
       }
       
-      const filepath = path.join(postsDir, filename)
-      fs.writeFileSync(filepath, markdownContent, 'utf8')
-      
-      console.log(`🔄 ${lang.toUpperCase()} フォールバック記事を生成しました: ${filename}`)
-      console.log(`📄 Fallback title: ${fallbackTitle}`)
-      generatedFiles.push({ lang, filename, filepath, title: fallbackTitle, category: fallbackCategory })
+      // GitHub Actionsでエラーとして扱うためにthrow
+      throw new Error(`Article generation failed for ${lang}: ${error.message}`)
     }
   }
   
@@ -337,6 +331,11 @@ async function generateAIPoweredArticle() {
   
   console.log('🎉 AI-powered article generation completed!')
   console.log(`📊 Total used titles: ${titleManager.getUsedTitlesCount()}`)
+  
+  // エラーが発生した場合は全体を失敗として扱う
+  if (generatedFiles.length === 0) {
+    throw new Error('No articles were generated successfully. All languages failed.')
+  }
   return generatedFiles
 }
 
