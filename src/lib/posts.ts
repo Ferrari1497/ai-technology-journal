@@ -27,7 +27,7 @@ export function getAllPosts(lang: Language = 'ja'): Post[] {
   }
   
   const fileNames = fs.readdirSync(postsDirectory)
-    .filter(fileName => fileName.endsWith('.md') && !fileName.startsWith('.gitkeep'))
+    .filter(fileName => fileName.endsWith('.md') && fileName !== '.gitkeep')
   const allPostsData = fileNames.map((fileName) => {
     const id = fileName.replace(/\.md$/, '')
     const fullPath = path.join(postsDirectory, fileName)
