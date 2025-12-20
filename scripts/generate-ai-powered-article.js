@@ -199,9 +199,10 @@ async function generateAIPoweredArticle() {
         `title: '${finalTitle}'`
       )
       
-      // ファイル名生成
+      // ファイル名生成（一意性を保証）
       const timestamp = Date.now()
-      const filename = `${new Date().toISOString().split('T')[0]}-${timestamp}-${finalTitle.toLowerCase().replace(/[^a-z0-9]/g, '-')}.md`
+      const randomId = Math.random().toString(36).substring(2, 10)
+      const filename = `${new Date().toISOString().split('T')[0]}-${timestamp}-${randomId}.md`
       
       console.log(`📄 Generated filename: ${filename}`)
       console.log(`📊 Content length: ${finalContent.length} characters`)
