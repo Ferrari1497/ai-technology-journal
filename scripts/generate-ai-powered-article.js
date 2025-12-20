@@ -57,7 +57,7 @@ async function callOpenAI(prompt, language = 'ja') {
         messages: [
           {
             role: 'system',
-            content: `You are a professional tech writer specializing in AI tools and technology. Write comprehensive, detailed, and informative articles in ${language === 'ja' ? 'Japanese' : language === 'en' ? 'English' : 'Thai'}. Focus on providing in-depth analysis, practical examples, and actionable insights. Make sure to write at least 3000 characters for comprehensive coverage. Always create unique titles and content, even when covering similar topics.`
+            content: `You are a professional tech writer specializing in AI tools and technology. Write comprehensive, detailed, and informative articles in ${language === 'ja' ? 'Japanese' : language === 'en' ? 'English' : 'Thai'}. Focus on providing in-depth analysis, practical examples, and actionable insights. Make sure to write at least 3000 characters for comprehensive coverage. Always create unique titles and content, even when covering similar topics. IMPORTANT: Always start your response with a unique, creative title on the first line starting with '# ', followed by the article content.`
           },
           {
             role: 'user',
@@ -87,15 +87,15 @@ async function callOpenAI(prompt, language = 'ja') {
 // 多言語プロンプトテンプレート（より多様なトピックと長い記事）
 const promptTemplates = {
   ja: [
-    "2025年最新のAIツール比較記事を3000文字以上で書いてください。ChatGPT、Claude、Geminiの機能、料金、使いやすさを詳しく比較し、実際の使用例、導入事例、メリット・デメリット、将来展望も含めてください。",
-    "AIライティングツールの徹底比較記事を3000文字以上で書いてください。Jasper、Copy.ai、Writesonic、Rytrなどの特徴、料金体系、導入事例、ROI分析、メリット・デメリットを詳しく解説してください。",
-    "コード生成AIツールの完全ガイドを3000文字以上で書いてください。GitHub Copilot、Cursor、Codeium、Tabnine、Amazon CodeWhispererの開発効率、精度、料金、対応言語、セキュリティ機能を詳しく比較してください。",
-    "AI画像生成ツールの総合レビューを3000文字以上で書いてください。Midjourney、DALL-E 3、Stable Diffusion、Adobe Firefly、Leonardo AIの画質、使いやすさ、料金、商用利用、ライセンスについて詳しく解説してください。",
-    "ビジネス向けAIチャットボットの企業導入ガイドを3000文字以上で書いてください。ChatGPT Enterprise、Claude Pro、Microsoft Copilot、Google Bardの企業導入事例、セキュリティ、コストパフォーマンス、コンプライアンスを中心に解説してください。",
-    "AI音声認識・音声合成ツールの最新動向を3000文字以上で書いてください。OpenAI Whisper、ElevenLabs、Murf、Speechify、Azure Speech Servicesの機能比較、精度、料金、実用事例を詳しく解説してください。",
-    "AIデータ分析ツールのビジネス活用ガイドを3000文字以上で書いてください。Tableau、Power BI、DataRobot、H2O.ai、Google Analytics Intelligenceの機能、導入コスト、ROI、成功事例を詳しく解説してください。",
-    "AI翻訳ツールの精度比較とビジネス活用を3000文字以上で書いてください。DeepL、Google Translate、Microsoft Translator、Amazon Translate、Papagoの精度、対応言語、料金、API連携、企業導入事例を詳しく解説してください。",
-    "AI自動化ツールの導入効果と選び方ガイドを3000文字以上で書いてください。Zapier、Microsoft Power Automate、UiPath、Automation Anywhere、Blue Prismの機能比較、導入コスト、ROI分析、業務効率化事例を詳しく解説してください。"
+    "2025年最新のAIツール比較について、独自の視点で3000文字以上の記事を書いてください。ChatGPT、Claude、Geminiなどの機能、料金、使いやすさを詳しく比較し、実際の使用例、導入事例、メリット・デメリット、将来展望も含めてください。記事の最初に創造的で魅力的なタイトルを必ず付けてください。",
+    "AIライティングツールについて、ユニークな観点から3000文字以上の記事を書いてください。Jasper、Copy.ai、Writesonic、Rytrなどの特徴、料金体系、導入事例、ROI分析、メリット・デメリットを詳しく解説してください。記事の最初に独創的なタイトルを必ず付けてください。",
+    "コード生成AIツールについて、新しい切り口で3000文字以上の記事を書いてください。GitHub Copilot、Cursor、Codeium、Tabnine、Amazon CodeWhispererの開発効率、精度、料金、対応言語、セキュリティ機能を詳しく比較してください。記事の最初にオリジナルなタイトルを必ず付けてください。",
+    "AI画像生成ツールについて、独自の分析で3000文字以上の記事を書いてください。Midjourney、DALL-E 3、Stable Diffusion、Adobe Firefly、Leonardo AIの画質、使いやすさ、料金、商用利用、ライセンスについて詳しく解説してください。記事の最初に創造的なタイトルを必ず付けてください。",
+    "ビジネス向けAIチャットボットについて、革新的な視点で3000文字以上の記事を書いてください。ChatGPT Enterprise、Claude Pro、Microsoft Copilot、Google Bardの企業導入事例、セキュリティ、コストパフォーマンス、コンプライアンスを中心に解説してください。記事の最初に魅力的なタイトルを必ず付けてください。",
+    "AI音声認識・音声合成ツールについて、独特な観点から3000文字以上の記事を書いてください。OpenAI Whisper、ElevenLabs、Murf、Speechify、Azure Speech Servicesの機能比較、精度、料金、実用事例を詳しく解説してください。記事の最初にユニークなタイトルを必ず付けてください。",
+    "AIデータ分析ツールについて、新しい視点で3000文字以上の記事を書いてください。Tableau、Power BI、DataRobot、H2O.ai、Google Analytics Intelligenceの機能、導入コスト、ROI、成功事例を詳しく解説してください。記事の最初に独創的なタイトルを必ず付けてください。",
+    "AI翻訳ツールについて、オリジナルな切り口で3000文字以上の記事を書いてください。DeepL、Google Translate、Microsoft Translator、Amazon Translate、Papagoの精度、対応言語、料金、API連携、企業導入事例を詳しく解説してください。記事の最初に創造的なタイトルを必ず付けてください。",
+    "AI自動化ツールについて、革新的な観点から3000文字以上の記事を書いてください。Zapier、Microsoft Power Automate、UiPath、Automation Anywhere、Blue Prismの機能比較、導入コスト、ROI分析、業務効率化事例を詳しく解説してください。記事の最初に魅力的なタイトルを必ず付けてください。"
   ],
   en: [
     "Write a comprehensive 3000+ word comparison article about the latest AI tools in 2025. Compare ChatGPT, Claude, and Gemini in terms of features, pricing, usability, real-world use cases, implementation examples, pros/cons, and future prospects.",
@@ -265,11 +265,12 @@ async function generateAIPoweredArticle() {
       // Markdown記事を作成
       const markdownContent = createMarkdownArticle(aiContent, title, category, lang)
       
-      // ファイル名を生成（ユニークなタイムスタンプ付き）
+      // ファイル名を生成（ユニークなタイムスタンプとランダム文字列付き）
       const timestamp = Date.now()
-      const randomSuffix = Math.random().toString(36).substring(2, 8)
-      const safeTitle = title.toLowerCase().replace(/[^a-z0-9\u3040-\u309F\u30A0-\u30FF\u4E00-\u9FAF]/g, '-').substring(0, 30)
-      const filename = `${new Date().toISOString().split('T')[0]}-${timestamp}-${randomSuffix}-${safeTitle}.md`
+      const randomSuffix = Math.random().toString(36).substring(2, 12)
+      const dateStr = new Date().toISOString().split('T')[0]
+      const safeTitle = title.toLowerCase().replace(/[^a-z0-9\u3040-\u309F\u30A0-\u30FF\u4E00-\u9FAF]/g, '-').substring(0, 20)
+      const filename = `${dateStr}-${timestamp}-${randomSuffix}-${safeTitle}.md`
       
       console.log(`📄 Generated filename: ${filename}`)
       console.log(`📊 Content length: ${markdownContent.length} characters`)
