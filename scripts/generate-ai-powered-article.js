@@ -189,9 +189,8 @@ async function generateAIPoweredArticle() {
       const extractedTitle = titleMatch[1]
       console.log(`📝 Generated title: ${extractedTitle}`)
       
-      // タイトル重複チェック
-      const uniqueTitle = titleManager.generateUniqueTitle(`${lang}:${extractedTitle}`)
-      const finalTitle = uniqueTitle.replace(`${lang}:`, '')
+      // タイトルをそのまま使用（重複チェックを無効化）
+      const finalTitle = extractedTitle
       
       // タイトルを更新した最終コンテンツ
       const finalContent = generatedContent.replace(
@@ -199,10 +198,10 @@ async function generateAIPoweredArticle() {
         `title: '${finalTitle}'`
       )
       
-      // ファイル名生成（一意性を保証）
+      // ファイル名生成（完全に一意性を保証）
       const timestamp = Date.now()
-      const randomId = Math.random().toString(36).substring(2, 10)
-      const filename = `${new Date().toISOString().split('T')[0]}-${timestamp}-${randomId}.md`
+      const randomId = Math.random().toString(36).substring(2, 12) + Math.random().toString(36).substring(2, 8)
+      const filename = `${new Date().toISOString().split('T')[0]}-${timestamp}-${lang}-${randomId}.md`
       
       console.log(`📄 Generated filename: ${filename}`)
       console.log(`📊 Content length: ${finalContent.length} characters`)
