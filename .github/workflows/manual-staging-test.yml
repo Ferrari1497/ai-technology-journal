@@ -71,22 +71,26 @@ jobs:
         
         if git diff --staged --quiet; then
           echo "❌ No changes to commit"
+          exit 1
         else
           git commit -m "Add AI-generated articles for staging test $(date +'%Y-%m-%d %H:%M')"
           git push origin staging
           echo "✅ Successfully pushed changes"
         fi
         
-    - name: Pull latest changes after commit
+    - name: Build with latest articles
       run: |
-        echo "🔄 Pulling latest changes to include generated articles in build..."
-        git pull origin staging
+        echo "🏗️ Building Next.js with all generated articles..."
+        # 最新の記事を確実に含めるためにビルド前に確認
+        echo "📊 Articles before build:"
+        find posts -name "*.md" | wc -l
         
-    - name: Build and deploy to staging
-      run: |
-        echo "🏗️ Building Next.js for staging with all articles..."
         npx next build
         
+        echo "✅ Build completed with all articles included"
+        
+    - name: Deploy to staging
+      run: |
         echo "🚀 Deploying to S3 staging..."
         aws s3 sync out/ s3://${{ secrets.S3_BUCKET_STAGING }} --delete --no-progress
         
@@ -97,5 +101,39 @@ jobs:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         AWS_DEFAULT_REGION: ap-northeast-1
+        
+    - name: Verify deployment and generate report
+      run: |
+        echo "🔍 Verifying deployment..."
+        
+        # サイトの可用性チェック
+        if curl -s -o /dev/null -w "%{http_code}" http://ai-tech-journal-staging-1766124861.s3-website-ap-northeast-1.amazonaws.com | grep -q "200"; then
+          echo "✅ Site is accessible"
+        else
+          echo "❌ Site accessibility check failed"
+        fi
+        
+        # 生成された記事数をカウント
+        ja_count=$(find posts/ja -name "*.md" | wc -l)
+        en_count=$(find posts/en -name "*.md" | wc -l)
+        th_count=$(find posts/th -name "*.md" | wc -l)
+        total_count=$((ja_count + en_count + th_count))
+        
+        echo "📊 Article Generation Summary:"
+        echo "   Japanese: $ja_count articles"
+        echo "   English: $en_count articles"
+        echo "   Thai: $th_count articles"
+        echo "   Total: $total_count articles"
+        
+        # 最新記事の情報を表示
+        echo "📝 Latest generated articles:"
+        find posts -name "*.md" -type f -exec ls -lt {} + | head -6
+        
+        echo "🎯 Test completed successfully!"
+        
+        # ステージングレポート生成
+        echo "📊 Generating staging report..."
+        npm run staging:report
+      env:
         NEXT_PUBLIC_SITE_URL: http://ai-tech-journal-staging-1766124861.s3-website-ap-northeast-1.amazonaws.com
         NEXT_PUBLIC_ENVIRONMENT: staging

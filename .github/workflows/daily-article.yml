@@ -129,8 +129,15 @@ jobs:
           echo "✅ Successfully pushed changes"
         fi
         
-    - name: Build Next.js
-      run: npx next build
+    - name: Build Next.js with latest articles
+      run: |
+        echo "🏗️ Building Next.js with all generated articles..."
+        echo "📊 Articles before build:"
+        find posts -name "*.md" | wc -l
+        
+        npx next build
+        
+        echo "✅ Build completed with all articles included"
       env:
         NEXT_PUBLIC_SITE_URL: http://ai-tech-journal-staging-1766124861.s3-website-ap-northeast-1.amazonaws.com
         NEXT_PUBLIC_ENVIRONMENT: staging

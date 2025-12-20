@@ -50,6 +50,33 @@ const categories = {
   }
 }
 
+// 記事品質チェック関数
+function validateArticleQuality(content, lang) {
+  const issues = []
+  
+  // 文字数チェック
+  const wordCount = content.replace(/---[\s\S]*?---/, '').trim().length
+  if (wordCount < 1500) {
+    issues.push(`文字数不足: ${wordCount}文字 (推奨: 1500文字以上)`)
+  }
+  
+  // 必須要素チェック
+  const requiredElements = ['title:', 'date:', 'excerpt:', 'category:', 'tags:']
+  requiredElements.forEach(element => {
+    if (!content.includes(element)) {
+      issues.push(`必須要素不足: ${element}`)
+    }
+  })
+  
+  // 見出し構造チェック
+  const headings = content.match(/^#{1,6}\s+.+$/gm) || []
+  if (headings.length < 3) {
+    issues.push(`見出し不足: ${headings.length}個 (推奨: 3個以上)`)
+  }
+  
+  return { isValid: issues.length === 0, issues, wordCount, headingCount: headings.length }
+}
+
 // OpenAI API呼び出し関数
 async function callOpenAI(prompt, maxTokens = 4000) {
   try {
@@ -199,7 +226,33 @@ async function generateAIPoweredArticle() {
       // OpenAI APIで記事生成
       console.log('🤖 Calling OpenAI API...')
       const prompt = createArticlePrompt(lang, categoryInfo)
-      const generatedContent = await callOpenAI(prompt, 4000)
+      let generatedContent = await callOpenAI(prompt, 4000)
+      
+      // 記事品質チェック
+      console.log('🔍 Validating article quality...')
+      const qualityCheck = validateArticleQuality(generatedContent, lang)
+      
+      if (!qualityCheck.isValid) {
+        console.log('⚠️ Quality issues detected:')
+        qualityCheck.issues.forEach(issue => console.log(`   - ${issue}`))
+        
+        // 品質改善のための再生成を試みる
+        console.log('🔄 Attempting to regenerate with quality improvements...')
+        const improvedPrompt = prompt + `\n\n重要: 以下の品質基準を満たしてください:
+- 2000文字以上の詳細な内容
+- 3個以上の見出し(##, ###)を使用
+- 具体例や数値を含む実用的な情報`
+        
+        generatedContent = await callOpenAI(improvedPrompt, 4500)
+        
+        // 再チェック
+        const recheck = validateArticleQuality(generatedContent, lang)
+        console.log(`📊 Quality recheck: ${recheck.isValid ? '✅ Passed' : '⚠️ Still has issues'}`)
+        console.log(`   Word count: ${recheck.wordCount}, Headings: ${recheck.headingCount}`)
+      } else {
+        console.log('✅ Quality check passed')
+        console.log(`   Word count: ${qualityCheck.wordCount}, Headings: ${qualityCheck.headingCount}`)
+      }
       
       // タイトル抽出
       const titleMatch = generatedContent.match(/title:\s*['"]([^'"]+)['"]/i)

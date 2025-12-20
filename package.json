@@ -31,6 +31,7 @@
     "staging:tools": "node scripts/generate-staging-articles.js tools",
     "staging:all": "node scripts/generate-staging-articles.js all",
     "staging:auth": "node scripts/setup-basic-auth.js",
+    "staging:report": "node scripts/staging-report.js",
     "check-duplicate-titles": "node scripts/check-duplicate-titles.js",
     "sync-existing-titles": "node scripts/sync-existing-titles.js",
     "reset-used-prompts": "node scripts/reset-used-prompts.js"
