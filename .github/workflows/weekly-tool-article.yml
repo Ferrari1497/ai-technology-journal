@@ -1,9 +1,9 @@
 name: Weekly Tool Article Generation
 
 on:
-  schedule:
-    - cron: '0 10 * * 1'  # 毎週月曜日午前10時（JST 19時）に実行
-  workflow_dispatch:  # 手動実行も可能
+  # schedule:
+  #   - cron: '0 10 * * 1'  # 毎週月曜日午前10時（JST 19時）に実行 - DISABLED
+  workflow_dispatch:  # 手動実行のみ
 
 permissions:
   contents: write

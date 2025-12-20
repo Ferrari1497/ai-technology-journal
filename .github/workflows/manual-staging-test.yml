@@ -34,6 +34,12 @@ jobs:
       
     - name: Generate AI-powered articles for staging
       run: |
+        if [ -z "$OPENAI_API_KEY" ]; then
+          echo "❌ OPENAI_API_KEY is not set. Skipping AI generation to prevent charges."
+          echo "💬 To enable: Set OPENAI_API_KEY in GitHub Secrets"
+          exit 1
+        fi
+        
         echo "🤖 Starting AI-powered article generation for staging..."
         echo "📊 Generating ${{ github.event.inputs.article_count }} set(s) of articles"
         

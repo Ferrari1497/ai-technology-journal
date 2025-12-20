@@ -1,9 +1,9 @@
 name: Daily Article Generation
 
 on:
-  schedule:
-    - cron: '0 9 * * *'  # 毎日午前9時（JST 18時）に実行
-  workflow_dispatch:  # 手動実行も可能
+  # schedule:
+  #   - cron: '0 9 * * *'  # 毎日午前9時（JST 18時）に実行 - DISABLED
+  workflow_dispatch:  # 手動実行のみ
 
 permissions:
   contents: write
