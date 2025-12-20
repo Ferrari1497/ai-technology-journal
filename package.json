@@ -33,6 +33,7 @@
     "staging:auth": "node scripts/setup-basic-auth.js",
     "staging:report": "node scripts/staging-report.js",
     "staging:clear-cache": "node scripts/clear-staging-cache.js",
+    "staging:fix-website": "node scripts/fix-s3-website.js",
     "check-duplicate-titles": "node scripts/check-duplicate-titles.js",
     "sync-existing-titles": "node scripts/sync-existing-titles.js",
     "reset-used-prompts": "node scripts/reset-used-prompts.js"

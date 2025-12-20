@@ -98,14 +98,15 @@ jobs:
     - name: Deploy to staging
       run: |
         echo "🚀 Deploying to S3 staging..."
-        aws s3 sync out/ s3://${{ secrets.S3_BUCKET_STAGING }} --delete --no-progress
+        aws s3 sync out/ s3://${{ secrets.S3_BUCKET_STAGING }} --delete --no-progress --content-type "text/html" --exclude "*" --include "*.html"
+        aws s3 sync out/ s3://${{ secrets.S3_BUCKET_STAGING }} --delete --no-progress --exclude "*.html"
         
         echo "🗑️ Clearing browser cache..."
         # Cache-Controlヘッダーを設定してキャッシュを無効化
-        aws s3 cp s3://${{ secrets.S3_BUCKET_STAGING }}/index.html s3://${{ secrets.S3_BUCKET_STAGING }}/index.html --metadata-directive REPLACE --cache-control "no-cache, no-store, must-revalidate"
+        aws s3 cp s3://${{ secrets.S3_BUCKET_STAGING }}/index.html s3://${{ secrets.S3_BUCKET_STAGING }}/index.html --metadata-directive REPLACE --cache-control "no-cache, no-store, must-revalidate" --content-type "text/html"
         
         # 主要なHTMLファイルのキャッシュをクリア
-        aws s3 cp s3://${{ secrets.S3_BUCKET_STAGING }}/posts/ s3://${{ secrets.S3_BUCKET_STAGING }}/posts/ --recursive --metadata-directive REPLACE --cache-control "no-cache, no-store, must-revalidate" --exclude "*" --include "*.html" || true
+        aws s3 cp s3://${{ secrets.S3_BUCKET_STAGING }}/posts/ s3://${{ secrets.S3_BUCKET_STAGING }}/posts/ --recursive --metadata-directive REPLACE --cache-control "no-cache, no-store, must-revalidate" --content-type "text/html" --exclude "*" --include "*.html" || true
         
         echo "✅ Deployment completed!"
         echo "🌐 Staging URL: http://ai-tech-journal-staging-1766124861.s3-website-ap-northeast-1.amazonaws.com"
