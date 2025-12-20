@@ -147,9 +147,18 @@ jobs:
     - name: Deploy to S3
       run: |
         aws s3 sync out/ s3://${{ secrets.S3_BUCKET_STAGING }} --delete --no-progress
+        
+        echo "🗑️ Clearing browser cache..."
+        # Cache-Controlヘッダーを設定してキャッシュを無効化
+        aws s3 cp s3://${{ secrets.S3_BUCKET_STAGING }}/index.html s3://${{ secrets.S3_BUCKET_STAGING }}/index.html --metadata-directive REPLACE --cache-control "no-cache, no-store, must-revalidate"
+        
+        # 主要なHTMLファイルのキャッシュをクリア
+        aws s3 cp s3://${{ secrets.S3_BUCKET_STAGING }}/posts/ s3://${{ secrets.S3_BUCKET_STAGING }}/posts/ --recursive --metadata-directive REPLACE --cache-control "no-cache, no-store, must-revalidate" --exclude "*" --include "*.html" || true
+        
         echo "✅ Deployment completed successfully"
         echo "🌐 Staging URL: http://ai-tech-journal-staging-1766124861.s3-website-ap-northeast-1.amazonaws.com"
         echo "🔐 Login: admin / staging123"
+        echo "💬 Note: Browser cache cleared. Hard refresh (Ctrl+F5) recommended."
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
