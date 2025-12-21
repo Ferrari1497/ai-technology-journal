@@ -524,5 +524,15 @@
         "seoScore": 79
       }
     ]
+  },
+  {
+    "date": "2025-12-21",
+    "pageViews": 5093,
+    "revenue": 2951,
+    "seoScore": 75,
+    "engagementRate": 50.192330072337896,
+    "bounceRate": 40.15862116134062,
+    "avgTimeOnPage": 135.21483348118227,
+    "posts": []
   }
 ]
