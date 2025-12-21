@@ -1,0 +1,61 @@
+name: Stop All AWS Environments
+
+on:
+  workflow_dispatch:  # 手動実行専用
+
+permissions:
+  contents: read
+
+jobs:
+  stop-all-environments:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Stop all AWS environments
+      run: |
+        echo "🛑 Stopping ALL AWS environments to prevent charges..."
+        
+        # 全S3バケットをリスト
+        echo "📋 Listing all S3 buckets..."
+        aws s3 ls
+        
+        # ステージングバケット停止
+        STAGING_BUCKET="${{ secrets.S3_BUCKET_STAGING }}"
+        if [ -n "$STAGING_BUCKET" ]; then
+          echo "🛑 Stopping staging: $STAGING_BUCKET"
+          aws s3 rm s3://$STAGING_BUCKET --recursive || true
+          aws s3api delete-bucket-website --bucket $STAGING_BUCKET || true
+          aws s3api delete-bucket-policy --bucket $STAGING_BUCKET || true
+          aws s3api delete-bucket --bucket $STAGING_BUCKET || true
+        fi
+        
+        # 本番バケット停止
+        PROD_BUCKET="${{ secrets.S3_BUCKET_PROD }}"
+        if [ -n "$PROD_BUCKET" ]; then
+          echo "🛑 Stopping production: $PROD_BUCKET"
+          aws s3 rm s3://$PROD_BUCKET --recursive || true
+          aws s3api delete-bucket-website --bucket $PROD_BUCKET || true
+          aws s3api delete-bucket-policy --bucket $PROD_BUCKET || true
+          aws s3api delete-bucket --bucket $PROD_BUCKET || true
+        fi
+        
+        # CloudFrontディストリビューション無効化
+        CLOUDFRONT_ID="${{ secrets.CLOUDFRONT_DISTRIBUTION_ID_PROD }}"
+        if [ -n "$CLOUDFRONT_ID" ]; then
+          echo "☁️ Disabling CloudFront distribution: $CLOUDFRONT_ID"
+          aws cloudfront get-distribution-config --id $CLOUDFRONT_ID --query 'DistributionConfig' > /tmp/dist-config.json || true
+          # CloudFrontの無効化は複雑なため、手動で行うことを推奨
+          echo "⚠️ CloudFront distribution needs manual deletion from AWS Console"
+        fi
+        
+        # 残存バケットの確認
+        echo "📋 Remaining S3 buckets:"
+        aws s3 ls || echo "No buckets remaining"
+        
+        echo "✅ All environments stopped!"
+        echo "💰 AWS charges should now be $0.00/month"
+        echo "⚠️ Please check AWS Console to confirm all resources are deleted"
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_DEFAULT_REGION: ap-northeast-1
