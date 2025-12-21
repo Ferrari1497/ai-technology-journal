@@ -1,0 +1,31 @@
+#!/bin/bash
+
+echo "🛑 Stopping S3 staging environment to prevent charges..."
+
+BUCKET_NAME="ai-tech-journal-staging-1766124861"
+
+# 1. バケット内の全ファイルを削除
+echo "🗑️ Deleting all files in bucket..."
+aws s3 rm s3://$BUCKET_NAME --recursive
+
+# 2. ウェブサイト設定を削除
+echo "🌐 Removing website configuration..."
+aws s3api delete-bucket-website --bucket $BUCKET_NAME
+
+# 3. バケットポリシーを削除
+echo "📝 Removing bucket policy..."
+aws s3api delete-bucket-policy --bucket $BUCKET_NAME
+
+# 4. パブリックアクセスブロックを有効化
+echo "🔒 Enabling public access block..."
+aws s3api put-public-access-block \
+  --bucket $BUCKET_NAME \
+  --public-access-block-configuration "BlockPublicAcls=true,IgnorePublicAcls=true,BlockPublicPolicy=true,RestrictPublicBuckets=true"
+
+# 5. バケット自体を削除
+echo "🗂️ Deleting bucket..."
+aws s3api delete-bucket --bucket $BUCKET_NAME
+
+echo "✅ S3 staging environment completely stopped!"
+echo "💰 No more charges will occur from this environment"
+echo "🌐 URL will no longer be accessible: http://$BUCKET_NAME.s3-website-ap-northeast-1.amazonaws.com"
