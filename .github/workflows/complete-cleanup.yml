@@ -1,0 +1,64 @@
+name: Complete AWS Resource Cleanup
+
+on:
+  workflow_dispatch:  # 手動実行専用
+
+permissions:
+  contents: read
+
+jobs:
+  cleanup-all-resources:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Complete AWS resource cleanup
+      run: |
+        echo "🔍 Checking and cleaning up ALL AWS resources..."
+        
+        # S3バケット完全削除
+        echo "🗑️ Deleting ALL S3 buckets..."
+        aws s3 ls | awk '{print $3}' | while read bucket; do
+          echo "Deleting bucket: $bucket"
+          aws s3 rm s3://$bucket --recursive || true
+          aws s3api delete-bucket --bucket $bucket || true
+        done
+        
+        # CloudFront distributions
+        echo "☁️ Listing CloudFront distributions..."
+        aws cloudfront list-distributions --query 'DistributionList.Items[*].[Id,Status,DomainName]' --output table || true
+        
+        # EC2 instances
+        echo "💻 Checking EC2 instances..."
+        aws ec2 describe-instances --query 'Reservations[*].Instances[*].[InstanceId,State.Name]' --output table || true
+        
+        # Lambda functions
+        echo "⚡ Checking Lambda functions..."
+        aws lambda list-functions --query 'Functions[*].[FunctionName,Runtime]' --output table || true
+        
+        # RDS instances
+        echo "🗄️ Checking RDS instances..."
+        aws rds describe-db-instances --query 'DBInstances[*].[DBInstanceIdentifier,DBInstanceStatus]' --output table || true
+        
+        # EBS volumes
+        echo "💾 Checking EBS volumes..."
+        aws ec2 describe-volumes --query 'Volumes[*].[VolumeId,State,Size]' --output table || true
+        
+        # Elastic IPs
+        echo "🌐 Checking Elastic IPs..."
+        aws ec2 describe-addresses --query 'Addresses[*].[PublicIp,AssociationId]' --output table || true
+        
+        # NAT Gateways
+        echo "🚪 Checking NAT Gateways..."
+        aws ec2 describe-nat-gateways --query 'NatGateways[*].[NatGatewayId,State]' --output table || true
+        
+        # Load Balancers
+        echo "⚖️ Checking Load Balancers..."
+        aws elbv2 describe-load-balancers --query 'LoadBalancers[*].[LoadBalancerName,State.Code]' --output table || true
+        
+        echo "✅ Resource check completed!"
+        echo "💡 Check the output above for any remaining resources"
+        echo "💰 Delete any listed resources to stop charges"
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_DEFAULT_REGION: ap-northeast-1
