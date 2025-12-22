@@ -1,9 +1,9 @@
 name: PDCA Optimization
 
 on:
-  schedule:
-    # 毎週月曜日の午前8時（JST）に実行
-    - cron: '0 23 * * 0'
+  # schedule:
+  #   # 毎週月曜日の午前8時（JST）に実行 - DISABLED
+  #   - cron: '0 23 * * 0'
   workflow_dispatch:
     inputs:
       force_analysis:
@@ -93,62 +93,9 @@ jobs:
         fi
         
     - name: Create optimization report
-      uses: actions/github-script@v7
-      with:
-        script: |
-          const fs = require('fs');
-          
-          let configData = {};
-          let historyData = {};
-          
-          try {
-            if (fs.existsSync('data/optimization-config.json')) {
-              configData = JSON.parse(fs.readFileSync('data/optimization-config.json', 'utf8'));
-            }
-            if (fs.existsSync('data/performance-history.json')) {
-              historyData = JSON.parse(fs.readFileSync('data/performance-history.json', 'utf8'));
-            }
-          } catch (error) {
-            console.error('設定ファイルの読み込みエラー:', error);
-          }
-          
-          const issueBody = `
-          ## PDCA最適化レポート 🔄
-          
-          **実行日時**: ${new Date().toISOString()}
-          **データ期間**: ${historyData.length || 0}日分
-          
-          ### 最適化設定
-          - **推奨カテゴリ**: ${configData.targetCategory || 'N/A'}
-          - **最適文字数**: ${configData.optimalWordCount || 'N/A'}文字
-          - **優先キーワード**: ${(configData.priorityKeywords || []).join(', ') || 'N/A'}
-          
-          ### 成功パターン
-          ${(configData.contentStrategy?.successPatterns || ['データ不足']).map(pattern => 
-            `- ${pattern}`
-          ).join('\n')}
-          
-          ### 改善フォーカス
-          ${(configData.contentStrategy?.improvementFocus || ['データ収集中']).map(focus => 
-            `- ${focus}`
-          ).join('\n')}
-          
-          ### 次回記事生成への影響
-          - 記事カテゴリが自動最適化されます
-          - キーワード選定が改善されます
-          - 文字数が最適化されます
-          
-          ---
-          *このレポートは自動生成されました。次回の記事生成から新しい設定が適用されます。*
-          `;
-          
-          github.rest.issues.create({
-            owner: context.repo.owner,
-            repo: context.repo.repo,
-            title: `PDCA最適化完了: ${new Date().toISOString().split('T')[0]}`,
-            body: issueBody,
-            labels: ['pdca', 'optimization', 'automated']
-          });
+      run: |
+        echo "⚠️ 最適化レポート作成機能は無効化されています"
+        echo "✅ PDCA分析は完了しましたが、Issue作成はスキップされました"
           
     - name: Optimization summary
       run: |

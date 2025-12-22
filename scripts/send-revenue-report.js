@@ -238,63 +238,13 @@ function generateSEOSummary() {
 }
 
 async function sendRevenueReport() {
-  // 模擬的な過去データ生成（実際の運用では実データを使用）
-  const mockData = []
-  for (let i = 30; i >= 0; i--) {
-    const date = new Date()
-    date.setDate(date.getDate() - i)
-    mockData.push({
-      date: date.toISOString().split('T')[0],
-      adsenseRevenue: Math.round(Math.random() * 2000 + 500),
-      affiliateRevenue: Math.round(Math.random() * 5000 + 1000),
-      totalRevenue: 0,
-      pageViews: Math.floor(Math.random() * 3000 + 1000),
-      clicks: 0
-    })
-  }
-  
-  // 合計値を計算
-  mockData.forEach(d => {
-    d.totalRevenue = d.adsenseRevenue + d.affiliateRevenue
-    d.clicks = Math.floor(d.pageViews * 0.02)
-  })
-  
-  const stats = calculateStats(mockData)
-  const seoData = generateSEOSummary()
-  
-  // PDCA分析実行
-  let pdcaData = null
-  try {
-    console.log('🔄 PDCA分析実行中...')
-    const pdcaResult = await runPDCAAnalysis()
-    pdcaData = pdcaResult.analysis
-  } catch (error) {
-    console.log('⚠️ PDCA分析エラー:', error.message)
-  }
-  
-  const emailContent = generateEmailContent(stats, seoData, pdcaData)
-  
-  // メール送信の模擬（実際の運用ではSES/SendGrid等を使用）
-  console.log('📧 日次レポートメール送信準備完了')
-  console.log('宛先: sudatomoya1105journey@gmail.com')
-  console.log('件名: [AI Technology Journal] 日次レポート - ' + stats.today.date)
-  console.log('本日の収益: ¥' + stats.today.totalRevenue.toLocaleString())
-  console.log('今月累計: ¥' + stats.monthToDate.toLocaleString())
-  console.log('今年累計: ¥' + stats.yearToDate.toLocaleString())
-  console.log('SEOスコア: ' + seoData.overallScore + '/100')
-  console.log('改善必要記事: ' + seoData.needsImprovement.length + '件')
-  
-  // HTMLファイルとして保存（テスト用）
-  const outputPath = path.join(__dirname, '..', 'daily-report.html')
-  fs.writeFileSync(outputPath, emailContent, 'utf8')
-  console.log('📄 日次レポートHTMLファイルを生成: ' + outputPath)
+  console.log('📧 メール送信機能は無効化されています')
+  console.log('⚠️ 日次レポート生成をスキップしました')
   
   return {
-    success: true,
-    recipient: 'sudatomoya1105journey@gmail.com',
-    stats: stats,
-    seoData: seoData,
-    pdcaData: pdcaData
+    success: false,
+    message: 'メール送信機能は無効化されています',
+    disabled: true
   }
 }
 

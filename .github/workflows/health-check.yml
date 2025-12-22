@@ -65,54 +65,9 @@ jobs:
         
     - name: Create issue on failure
       if: failure()
-      uses: actions/github-script@v7
-      with:
-        script: |
-          const fs = require('fs');
-          
-          let reportData = {};
-          try {
-            reportData = JSON.parse(fs.readFileSync('health-check-report.json', 'utf8'));
-          } catch (error) {
-            reportData = { error: 'レポートファイルの読み込みに失敗しました' };
-          }
-          
-          const issueBody = `
-          ## ヘルスチェック失敗 🚨
-          
-          **実行時刻**: ${reportData.timestamp || new Date().toISOString()}
-          
-          ### URL チェック結果
-          ${Object.entries(reportData.urls || {}).map(([env, result]) => 
-            `- **${env}**: ${result.success ? '✅' : '❌'} ${result.status || result.error}`
-          ).join('\n')}
-          
-          ### ファイルシステム チェック結果
-          ${(reportData.filesystem || []).filter(check => !check.exists).map(check => 
-            `- ❌ ${check.type}: ${check.path}`
-          ).join('\n') || '問題なし'}
-          
-          ### 記事数
-          ${Object.entries(reportData.posts || {}).map(([lang, data]) => 
-            `- **${lang}**: ${data.count}件`
-          ).join('\n')}
-          
-          ### 対応が必要な項目
-          1. 失敗したURLの確認と修復
-          2. 不足しているファイル・ディレクトリの復旧
-          3. 記事データの整合性確認
-          
-          ---
-          *このIssueは自動生成されました*
-          `;
-          
-          github.rest.issues.create({
-            owner: context.repo.owner,
-            repo: context.repo.repo,
-            title: `ヘルスチェック失敗: ${new Date().toISOString().split('T')[0]}`,
-            body: issueBody,
-            labels: ['health-check', 'automated', 'urgent']
-          });
+      run: |
+        echo "⚠️ Issue作成機能は無効化されています"
+        echo "❌ ヘルスチェック失敗しましたが、通知は送信されません"
           
     - name: Notify success
       if: success()

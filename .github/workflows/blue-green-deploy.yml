@@ -95,39 +95,9 @@ jobs:
         
     - name: Create deployment report
       if: always()
-      uses: actions/github-script@v7
-      with:
-        script: |
-          const success = '${{ job.status }}' === 'success';
-          const issueBody = `
-          ## Blue-Green デプロイメント ${success ? '✅ 成功' : '❌ 失敗'}
-          
-          **環境**: production
-          **実行時刻**: ${new Date().toISOString()}
-          **コミット**: ${{ github.sha }}
-          **実行者**: ${{ github.actor }}
-          
-          ### デプロイメント詳細
-          - Blue環境: ${{ secrets.S3_BUCKET_PROD }}
-          - Green環境: ${{ secrets.S3_BUCKET_PROD }}-green
-          - CloudFront: ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID_PROD }}
-          
-          ${success ? 
-            '### ✅ 成功\n- Green環境へのデプロイ完了\n- テスト通過\n- Blue-Green切り替え完了\n- 本番環境検証完了' :
-            '### ❌ 失敗\n- 自動ロールバック実行\n- 調査が必要です'
-          }
-          
-          ---
-          *このレポートは自動生成されました*
-          `;
-          
-          github.rest.issues.create({
-            owner: context.repo.owner,
-            repo: context.repo.repo,
-            title: `Blue-Green デプロイ ${success ? '成功' : '失敗'}: ${new Date().toISOString().split('T')[0]}`,
-            body: issueBody,
-            labels: ['deployment', 'blue-green', success ? 'success' : 'failure']
-          });
+      run: |
+        echo "⚠️ デプロイメントレポート作成機能は無効化されています"
+        echo "✅ Blue-Greenデプロイは完了しましたが、Issue作成はスキップされました"
           
     - name: Deployment summary
       run: |
