@@ -1,9 +1,13 @@
 {
-  "lastUpdated": "2026-01-11T23:21:12.803Z",
+  "lastUpdated": "2026-01-18T23:21:15.994Z",
   "targetCategory": "生成AIツール比較",
-  "optimalWordCount": 2000,
+  "optimalWordCount": 201,
   "priorityKeywords": [
-    "AI"
+    "AI",
+    "料金",
+    "ราคา",
+    "比較",
+    "おすすめ"
   ],
   "publishingStrategy": {
     "optimalTime": "09:00",
@@ -12,10 +16,9 @@
   },
   "contentStrategy": {
     "successPatterns": [
-      "データ収集中"
+      "高パフォーマンス記事の平均文字数: 179文字",
+      "成功率の高いカテゴリ: AI Tools Comparison"
     ],
-    "improvementFocus": [
-      "十分なデータが蓄積されていません"
-    ]
+    "improvementFocus": []
   }
 }
