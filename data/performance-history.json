@@ -954,5 +954,15 @@
     "bounceRate": 41.26858396040447,
     "avgTimeOnPage": 81.54561585460473,
     "posts": []
+  },
+  {
+    "date": "2026-10-26",
+    "pageViews": 1948,
+    "revenue": 1515,
+    "seoScore": 64,
+    "engagementRate": 71.26728545115513,
+    "bounceRate": 52.22775114644808,
+    "avgTimeOnPage": 202.3448022016828,
+    "posts": []
   }
 ]
